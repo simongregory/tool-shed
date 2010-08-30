@@ -8,7 +8,7 @@ class ToolTest < Test::Unit::TestCase
 
     setup do
       @out = StringIO.new
-      @tool = Tool.new({},@out)
+      @tool = Tool.new({:output => '/tmp/hel-tool.txt'},@out)
     end
 
     should "puts messages" do
@@ -36,7 +36,7 @@ class ToolTest < Test::Unit::TestCase
 
     setup do
       @out = StringIO.new
-      @tool = Tool.new({:silent => true}, @out)
+      @tool = Tool.new({:silent => true, :output => '/tmp/hel-tool.txt'}, @out)
     end
 
     should "not puts messages" do
@@ -54,7 +54,7 @@ class ToolTest < Test::Unit::TestCase
   context "A verbose hel-tool" do
     setup do
       @out = StringIO.new
-      @tool = Tool.new({:verbose => true}, @out)
+      @tool = Tool.new({:verbose => true, :output => '/tmp/hel-tool.txt'}, @out)
     end
 
     should "puts messages" do

@@ -11,7 +11,8 @@ class TestUnusedClass < Test::Unit::TestCase
         fix = File.expand_path(File.dirname(__FILE__)+ "/../fixtures/unused-cla")
         opt = { :src => "#{fix}/src",
                 :manifest => "#{fix}/manifest.xml",
-                :link_report => "#{fix}/link-report.xml" }
+                :link_report => "#{fix}/link-report.xml",
+                :output => '/tmp/hel-unused-class-tool.txt' }
 
         @out = StringIO.new
         @tool = UnusedClass.new(opt,@out)
@@ -34,7 +35,7 @@ class TestUnusedClass < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:manifest => "INVALID"}
+        opt = {:manifest => "INVALID", :output => '/tmp/hel-unused-class-tool.txt'}
         @out = StringIO.new
         @tool = UnusedClass.new(opt,@out)
       end
