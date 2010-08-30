@@ -1,0 +1,17 @@
+<report>
+  <scripts>
+		<script name="/Users/simon/ipd/electra/src/uk/co/bbc/electra/views/settingsview/AboutBBCDesktop.mxml" mod="1282818220809" size="1360" optimizedsize="1236">
+	      <def id="uk.co.bbc.electra.views.settingsview.AboutBBCDesktop" />
+	      <pre id="mx.binding:IWatcherSetupUtil" />
+	      <pre id="flash.display:Sprite" />
+	    </script>
+	    <script name="/Users/simon/ipd/electra/src/uk/co/bbc/electra/views/components/AboutWindow.mxml" mod="1280142913000" size="4461" optimizedsize="4268">
+	      <def id="uk.co.bbc.electra.views.components:AboutWindow" />
+	      <pre id="flash.events:IEventDispatcher" />
+	    </script>	    
+	</scripts>
+  <external-defs>
+  </external-defs>
+</report>
+
+

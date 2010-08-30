@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+
+require 'hel_tools'
+
+begin
+
+  opt = UnusedClassOpts.parse(ARGV)
+  UnusedClass.new(opt)
+
+rescue OptionParser::ParseError => e
+
+  puts e
+
+end

@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<componentPackage>
+	<component id="AboutBBCDesktop" class="uk.co.bbc.electra.views.settingsview.AboutBBCDesktop" />
+	<component id="AboutWindow" class="uk.co.bbc.electra.views.components.AboutWindow" />
+	<component id="UnusedClass" class="uk.co.bbc.electra.views.components.UnusedClass" />
+</componentPackage>
