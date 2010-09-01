@@ -22,7 +22,7 @@ class UnusedClass < Tool
     @manifest_regex = /<component id="(\w+)"/
 
     unless valid_opts
-      @out.puts "#{INVALID_OPTS} One or all of specified link report, manifest file, and source directories does not exist."
+      @out.puts "#{INVALID_OPTS} One or all of the specified link report, manifest file, or source directory does not exist."
       return
     end
 
@@ -44,7 +44,7 @@ class UnusedClass < Tool
     @link_classes = linked(@link_report, @link_regex, 'link-report')
 
     @unused_classes = @manifest_classes-@link_classes
-    @empty_packages = scan(@src)
+    @empty_packages = empties(@src)
 
     puts "Unused classes: #{@unused_classes.length.to_s}"
     puts "Empty packages: #{@empty_packages.length.to_s}"
@@ -55,7 +55,7 @@ class UnusedClass < Tool
   #
   # Scans the path for empty directories and lists them.
   #
-  def scan(path)
+  def empties(path)
     e = []
     Search.for_empties(path) { |p| e << p.sub( /^.*src\//, "") }
     e
