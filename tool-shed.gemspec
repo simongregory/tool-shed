@@ -5,7 +5,7 @@ $:.unshift lib unless $:.include?(lib)
 
 require 'bundler'
 require 'rake'
-require 'hel_tools'
+require 'tool_shed'
 
 #
 # For gem spec reference see:
