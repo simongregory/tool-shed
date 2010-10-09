@@ -30,11 +30,17 @@ Detects styles that are not used in a Flex application.
 
 ### as-asset-dector
 
+This script scans all Actionscript classes and CSS files in a project to
+identify assets, such as png files, that are in the project source tree but are
+no longer referenced by the application.
+
 ## Install
 
-    gem install hel-tools
+    gem install hel-tool
 
 ## Using
+
+Use examples are on their way.
 
 ## Authors
 
