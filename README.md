@@ -30,9 +30,9 @@ Detects styles that are not used in a Flex application.
 
 ### as-asset-dector
 
-This script scans all ActionScript classes and CSS files in a project to
-identify assets, such as png files, that are in the project source tree but are
-no longer referenced by the application.
+Under development. This script scans all ActionScript classes and CSS files in a
+project to identify assets, such as png files, that are in the project source
+tree but are no longer referenced by the application.
 
 ## Install
 
@@ -40,7 +40,7 @@ no longer referenced by the application.
 
 ## Using
 
-Use examples are on their way.
+Once all the tools are ready to use examples will follow.
 
 ## Authors
 
