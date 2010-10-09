@@ -25,7 +25,7 @@ namespace :test do
     test.verbose = true
   end
 
-  # Thanks to the Project Sprouts project and Luke Bayes for the coverage, flog
+  # Thanks to Project Sprouts and Luke Bayes for the coverage, flog
   # and flay tasks below.
   #
   namespace :coverage do
