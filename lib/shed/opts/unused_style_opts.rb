@@ -6,11 +6,11 @@
 class UnusedStyleOpts < ToolOpts
 
   def self.name
-    "hel-unused-style-detector"
+    "as-style-detector"
   end
 
   def self.description
-    "Helvector ActionScript Unused Style Detection Tool"
+    " ActionScript Unused Style Detection Tool"
   end
 
   def self.default_config

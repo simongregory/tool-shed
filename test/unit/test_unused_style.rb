@@ -8,7 +8,7 @@ class TestUnusedStyle < Test::Unit::TestCase
     File.expand_path(File.dirname(__FILE__)+ "/../fixtures/unused-css")
   end
 
-  context "A Helvector unused style detector" do
+  context "A  unused style detector" do
 
     context "with correct arguments" do
       setup do

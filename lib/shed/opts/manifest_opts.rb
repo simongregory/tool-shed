@@ -6,11 +6,11 @@
 class ManifestOpts < ToolOpts
 
   def self.description
-    "Helvector ActionScript Manifest Generator Tool"
+    "ActionScript Manifest Generator Tool"
   end
 
   def self.name
-    "hel-manifest"
+    "as-manifest"
   end
 
   def self.default_config

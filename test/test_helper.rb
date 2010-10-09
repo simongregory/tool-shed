@@ -3,7 +3,7 @@
 $:.push File.join(File.dirname(__FILE__), "..", "lib")
 $:.push File.dirname(__FILE__)
 
-require 'hel_tools'
+require 'tool_shed'
 require 'bundler'
 
 Bundler.require :development

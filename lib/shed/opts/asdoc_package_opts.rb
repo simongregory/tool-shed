@@ -6,7 +6,7 @@
 class ASDocPackageOpts < ToolOpts
 
   def self.name
-    'asdocp'
+    'as-docp'
   end
 
   def self.description

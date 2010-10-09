@@ -6,11 +6,11 @@
 class UnusedClassOpts < ToolOpts
 
   def self.name
-    "hel-unused-class-detector"
+    "as-class-detector"
   end
 
   def self.description
-    "Helvector ActionScript Unused Class Detection Tool"
+    "ActionScript unused class detection tool"
   end
 
   def self.default_config

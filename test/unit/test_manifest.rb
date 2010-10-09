@@ -7,7 +7,7 @@ class ManifestTest < Test::Unit::TestCase
   context "A manifest builder tool" do
 
     setup do
-      @output = '/tmp/hel-as-manifest-tool-test.xml'
+      @output = '/tmp/as-manifest-tool-test.xml'
       src  = File.expand_path(File.dirname(__FILE__)+ "/../fixtures/src")
       opts = ManifestOpts.parse ['-s', src,'-o', @output, '--silent']
       @manf = Manifest.new(opts)
@@ -38,7 +38,7 @@ class ManifestTest < Test::Unit::TestCase
 
   context "A manifest builder tool invoked on a empty directory" do
     setup do
-      @output = '/tmp/hel-as-manifest-tool-test.xml'
+      @output = '/tmp/as-manifest-tool-test.xml'
       src  = File.expand_path(File.dirname(__FILE__)+ "/../fixtures/empty")
       opts = ManifestOpts.parse ['-s', src,'-o', @output]
       @out = StringIO.new

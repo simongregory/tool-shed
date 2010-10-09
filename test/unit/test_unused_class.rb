@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), "/../test_helper")
 
 class TestUnusedClass < Test::Unit::TestCase
 
-  context "A Helvector unused class detector" do
+  context "A unused class detector" do
 
     context "with correct arguments" do
       setup do
@@ -35,7 +35,7 @@ class TestUnusedClass < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:manifest => "INVALID", :output => '/tmp/hel-unused-class-tool.txt'}
+        opt = {:manifest => "INVALID", :output => '/tmp/unused-class-tool.txt'}
         @out = StringIO.new
         @tool = UnusedClass.new(opt,@out)
       end

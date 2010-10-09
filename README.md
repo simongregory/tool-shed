@@ -36,7 +36,7 @@ no longer referenced by the application.
 
 ## Install
 
-    gem install hel-tool
+    gem install tool-shed
 
 ## Using
 

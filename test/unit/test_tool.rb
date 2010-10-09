@@ -4,11 +4,11 @@ require File.join(File.dirname(__FILE__), "/../test_helper")
 
 class ToolTest < Test::Unit::TestCase
 
-  context "A default hel-tool" do
+  context "A default tool-shed" do
 
     setup do
       @out = StringIO.new
-      @tool = Tool.new({:output => '/tmp/hel-tool.txt'},@out)
+      @tool = Tool.new({:output => '/tmp/tool-shed.txt'},@out)
     end
 
     should "puts messages" do
@@ -32,11 +32,11 @@ class ToolTest < Test::Unit::TestCase
 
   end
 
-  context "A silent hel-tool" do
+  context "A silent tool-shed" do
 
     setup do
       @out = StringIO.new
-      @tool = Tool.new({:silent => true, :output => '/tmp/hel-tool.txt'}, @out)
+      @tool = Tool.new({:silent => true, :output => '/tmp/tool-shed.txt'}, @out)
     end
 
     should "not puts messages" do
@@ -51,10 +51,10 @@ class ToolTest < Test::Unit::TestCase
 
   end
 
-  context "A verbose hel-tool" do
+  context "A verbose tool-shed" do
     setup do
       @out = StringIO.new
-      @tool = Tool.new({:verbose => true, :output => '/tmp/hel-tool.txt'}, @out)
+      @tool = Tool.new({:verbose => true, :output => '/tmp/tool-shed.txt'}, @out)
     end
 
     should "puts messages" do

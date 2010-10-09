@@ -10,7 +10,7 @@ class Tool
 
   def initialize(opt,out=STDOUT)
     @src      = opt[:src] || '.'
-    @output   = opt[:output] || 'hel-tool.txt'
+    @output   = opt[:output] || 'tool-shed.txt'
     @verbose  = opt[:verbose] || false
     @silent   = opt[:silent] || false
     @excludes = opt[:excludes] || ['.svn','.git']

@@ -7,12 +7,12 @@ require 'rake/clean'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
-require File.dirname(__FILE__) + '/lib/hel/version'
+require File.dirname(__FILE__) + '/lib/shed/version'
 
 Rake::RDocTask.new do |rdoc|
-  rdoc.title = "Helvector ActionScript Tools v.#{HelTool::VERSION::STRING}"
+  rdoc.title = " ActionScript Tools v.#{ToolShed::VERSION::STRING}"
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.main = "HelTool::HelTool"
+  rdoc.main = "ToolShed::ToolShed"
   rdoc.rdoc_files.include("README.md", "LICENSE", "lib/**/*.rb")
 end
 

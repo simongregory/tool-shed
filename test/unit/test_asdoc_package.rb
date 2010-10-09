@@ -57,7 +57,7 @@ class ASDocPackageTest < Test::Unit::TestCase
 
   context "A asdoc package builder tool invoked on a empty directory" do
     setup do
-      @output = '/tmp/hel-as-manifest-tool-test.xml'
+      @output = '/tmp/as-manifest-tool-test.xml'
       src  = File.expand_path(File.dirname(__FILE__)+ "/../fixtures/empty")
       opts = ASDocPackageOpts.parse ['-s', src,'-o', @output]
       @out = StringIO.new

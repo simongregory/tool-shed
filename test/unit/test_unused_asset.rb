@@ -45,7 +45,7 @@ class TestUnusedAsset < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:manifest => "INVALID", :output => '/tmp/hel-unused-asset-tool.txt'}
+        opt = {:manifest => "INVALID", :output => '/tmp/unused-asset-tool.txt'}
         @out = StringIO.new
         @tool = UnusedClass.new(opt,@out)
       end

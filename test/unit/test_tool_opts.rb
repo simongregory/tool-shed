@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), "/../test_helper")
 
 class ToolOptsTest < Test::Unit::TestCase
 
-  context "A Helvector Tool Options Parser" do
+  context "A  Tool Options Parser" do
 
     should "return default hash if no arguments are specified" do
 

@@ -12,15 +12,15 @@ require 'hel_tools'
 # http://docs.rubygems.org/read/chapter/20#rubyforge_project
 #
 Gem::Specification.new do |s|
-  s.name                      = HelTool::NAME
-  s.version                   = HelTool::VERSION::STRING
+  s.name                      = ToolShed::NAME
+  s.version                   = ToolShed::VERSION::STRING
   s.platform                  = Gem::Platform::RUBY
   s.authors                   = ["Simon Gregory"]
-  s.email                     = "tools@helvector.org"
-  s.homepage                  = "http://github.com/simongregory/hel-tools"
-  s.summary                   = "Helvector ActionScript Tools"
+  s.email                     = "tool-shed@helvector.org"
+  s.homepage                  = "http://github.com/simongregory/tool-shed"
+  s.summary                   = "ActionScript and Flex Project Tools"
   s.description               = <<EOF
-Utility scripts for working with ActionScript projects
+Utility scripts for working with ActionScript and Flex projects.
 EOF
   s.has_rdoc                  = true
   s.rdoc_options              = ["--charset=UTF-8"]
@@ -31,9 +31,9 @@ EOF
   s.test_files                = Dir["test/*_test.rb"]
   s.executables               = ['as-docp', 'as-manifest', 'as-class-detector', 'as-style-detector']
   s.post_install_message      = <<EOF
-Say Hello to Hel-Tools
-======================
-Get Tooled Up #{HelTool::VERSION::STRING}. Don't think. Kick off.
+Welcome to the Tool-Shed
+========================
+Get Tooled Up #{ToolShed::VERSION::STRING}. Kick off.
 
 EOF
   s.add_bundler_dependencies

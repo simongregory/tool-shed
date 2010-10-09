@@ -2,7 +2,7 @@
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 
-require 'hel_tools'
+require 'tool_shed'
 
 begin
 

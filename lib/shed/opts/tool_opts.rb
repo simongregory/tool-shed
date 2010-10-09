@@ -3,7 +3,7 @@
 require 'optparse'
 
 #
-# Abstract layer for the helvector tools options parsers. This sets the basic
+# Abstract layer for the tool shed options parsers. This sets the basic
 # paramaters the tools respond to via the command line.
 #
 class ToolOpts
@@ -12,14 +12,14 @@ class ToolOpts
   # The name of the tool, as invoked on the command line.
   #
   def self.name
-    HelTool::NAME
+    ToolShed::NAME
   end
 
   #
   # A basic description of the tools use.
   #
   def self.description
-    'Helvector Tool'
+    'Tool'
   end
 
   #
@@ -27,7 +27,7 @@ class ToolOpts
   # designed to invoke.
   #
   def self.version
-    HelTool::VERSION::STRING
+    ToolShed::VERSION::STRING
   end
 
   #

@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-module HelTool #:nodoc:
-  NAME = 'hel-tools'
+module ToolShed #:nodoc:
+  NAME = 'tool-shed'
   module VERSION #:nodoc:
     MAJOR = 0
     MINOR = 0
