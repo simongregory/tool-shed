@@ -1,6 +1,6 @@
-# ActionScript and Flex Project Tools
+# Tool Shed
 
-A collection of utility scripts for working with ActionScript and Flex projects.
+A collection of utility scripts to help working with ActionScript and Flex projects.
 
 ### as-docp
 

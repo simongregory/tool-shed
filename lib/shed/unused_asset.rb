@@ -6,46 +6,71 @@
 # no longer used by the application.
 #
 class UnusedAsset < Tool
+  attr_reader :assets, :src_files, :declared, :unused
+
   def initialize(opt,out=STDOUT)
     super(opt,out)
 
-    @link_report = opt[:link_report]
-    @manifest = opt[:manifest]
+    @project_dir = opt[:project_dir]
+    @assets = []
+    @src_files = []
+    @declared = []
 
     unless valid_opts
-      @out.puts "#{INVALID_OPTS} One or all of specified link report, manifest file, and source directories does not exist."
+      @out.puts "#{INVALID_OPTS} One or all of specified asset and source directories does not exist."
       return
     end
 
-    @declared_regex = /^TODO/
+    @declared_regex = /Embed\(source='([\w.\/]+)'/
 
     detect
 
-    @report = describe
+    #@report = describe
 
-    to_disk(@report)
+    #to_disk(@report)
   end
 
   def valid_opts
-    File.exist?(@link_report) && File.exist?(@manifest) && File.exist?(@src) rescue false
-  end
-
-  def detect
-    @declared = scan_dirs(/\.(css|as|mxml)/, @src, @declared_regex)
+    File.exist?(@project_dir) rescue false
   end
 
   private
+
+  def detect
+    Search.find_all(/\.(jpg|jpeg|png|otf)$/,@project_dir,@excludes) do |path|
+      @assets << path
+    end
+
+    @declared = scan_dirs(/\.(css|as|mxml)$/, @project_dir, @declared_regex)
+
+    @unused = []
+
+    @assets.each { |a|
+      @unused << a unless is_used(a)
+    }
+  end
+
+  def is_used(file)
+    used = false
+    @declared.each { |f|
+      if File.basename(f) == File.basename(file)
+        used = true
+      end
+    }
+    used
+  end
 
   #
   # Scans directories for all files that match the file extension regex, and
   # for each match goes on to scan that document for items matching the syntax
   # regex.
   #
-  def scan_dirs(extension_regex,path,syntax_regex)
+  def scan_dirs(file_ext_regex,path,syntax_regex)
     d = []
 
-    Search.find_all(extension_regex,path,@excludes) do |path|
-      d << scan_doc(path,syntax_regex)
+    Search.find_all(file_ext_regex,path,@excludes) do |p|
+      @src_files << p
+      d << scan_doc(p,syntax_regex)
     end
 
     d.flatten!.sort!.uniq! unless d.empty?
