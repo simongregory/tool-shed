@@ -42,6 +42,18 @@ tree but are no longer referenced by the application.
 
 Once all the tools are ready to use examples will follow.
 
+## Developing
+
+To the run the unit tests please create the following empty directories.
+
+    test/fixtures/empty/borg
+    test/fixtures/empty/org
+    test/fixtures/empty/xorg
+    test/fixtures/empty/zorg
+    test/fixtures/unused-cla/src/org
+    
+As git ignores them.
+  
 ## Authors
 
 [Simon Gregory](http://simongregory.com)

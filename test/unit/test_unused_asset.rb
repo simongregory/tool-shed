@@ -54,13 +54,13 @@ class TestUnusedAsset < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:src_dir => "INVALID", :output => '/tmp/unused-asset-tool.txt'}
+        opt = {:project_dir => "INVALID"}
         @out = StringIO.new
-        @tool = UnusedClass.new(opt,@out)
+        @tool = UnusedAsset.new(opt,@out)
       end
 
       should "fail with a warning message" do
-        assert_match(/#{UnusedClass::INVALID_OPTS}/, @out.string)
+        assert_match(/#{UnusedAsset::INVALID_OPTS}/, @out.string)
       end
     end
   end
