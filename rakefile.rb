@@ -42,4 +42,4 @@ desc "Default"
 task :default => [:test]
 
 desc "Run all tests and reports"
-task :cruise => ['ci:setup:testunit', 'metrics:all']
+task :hudson => ['ci:setup:testunit', :test, 'metrics:all']
