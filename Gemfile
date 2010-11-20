@@ -5,6 +5,6 @@ gem "rake"
 group :development do
   gem "shoulda"
   gem "mocha"
-  gem "rcov"
+  gem "metric_fu"
   gem "ci_reporter"
 end
