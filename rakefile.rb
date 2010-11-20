@@ -7,6 +7,9 @@ require 'rake/clean'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
+ENV['CI_REPORTS'] = 'coverage/reports' #Hide these here for now...
+require 'ci/reporter/rake/test_unit'
+
 require File.dirname(__FILE__) + '/lib/shed/version'
 
 Rake::RDocTask.new do |rdoc|
@@ -19,6 +22,19 @@ end
 CLEAN.add('rdoc')
 
 namespace :test do
+
+  #Create empty directories for the unit tests. We do this because git won't
+  #allow them to be checked in.
+  empties = ['test/fixtures/empty/borg',
+             'test/fixtures/empty/org',
+             'test/fixtures/empty/xorg',
+             'test/fixtures/empty/zorg',
+             'test/fixtures/unused-cla/src/org']
+
+  empties.each { |f|
+    sh "mkdir -p #{f}" unless File.exists?("#{f}")
+  }
+
   Rake::TestTask.new(:units) do |test|
     test.libs << "test"
     test.test_files = Dir["test/unit/test_*.rb"]
@@ -106,4 +122,4 @@ desc "Default"
 task :default => [:test]
 
 desc "Run all tests and reports"
-task :cruise => [:test, 'test:coverage', 'test:torture']
+task :cruise => ['ci:setup:testunit', :test, 'test:coverage', 'test:torture']
