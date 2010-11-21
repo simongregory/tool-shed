@@ -1,6 +1,7 @@
 # Tool Shed
 
-A collection of utility scripts to help working with ActionScript and Flex projects.
+A collection of utility scripts to help working with ActionScript and Flex 
+projects. These scripts are under development, so **don't** expect reliability.
 
 ### as-docp
 
@@ -40,7 +41,7 @@ tree but are no longer referenced by the application.
 
 ## Using
 
-Once all the tools are ready to use examples will follow.
+Examples will follow once the tools are in a stable state.
   
 ## Authors
 
@@ -48,5 +49,6 @@ Once all the tools are ready to use examples will follow.
 
 ## License
 
-Released under the MIT License. Please see the accompanying LICENSE document for
+Released under the MIT License. Please see the accompanying [LICENSE](LICENSE) document for
 details.
+

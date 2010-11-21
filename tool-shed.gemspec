@@ -27,13 +27,15 @@ EOF
   s.extra_rdoc_files          = ['LICENSE', 'README.md']
   s.required_rubygems_version = ">= 1.3.6"
   s.require_path              = ['lib']
-  s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store|.tmproj/
+  s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store|.tmproj|tmp|.gem/
   s.test_files                = Dir["test/*_test.rb"]
   s.executables               = ['as-docp', 'as-manifest', 'as-class-detector', 'as-style-detector']
   s.post_install_message      = <<EOF
 Welcome to the Tool-Shed
 ========================
 Get Tooled Up #{ToolShed::VERSION::STRING}. Kick off.
+
+Thanks for installing, the tools are under development. Don't expect reliability.
 
 EOF
   s.add_bundler_dependencies
