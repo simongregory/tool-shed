@@ -1,8 +1,9 @@
 # encoding: utf-8
 
 #
-# Abstract base class for tools. Provides basic default settings, and allows
-# control over the level of logging to standard out.
+# Abstract base class for tools. Provides basic default settings, allows
+# control over the level of logging to standard out, and installs a sig int
+# handler.
 #
 class Tool
 
@@ -15,6 +16,8 @@ class Tool
     @silent   = opt[:silent] || false
     @excludes = opt[:excludes] || ['.svn','.git']
     @out      = out
+
+    add_sigint_handler
   end
 
   #
@@ -55,6 +58,16 @@ class Tool
   #
   def generated_at
     "Generated at" + Time.now.strftime(" [%m/%d/%Y %H:%M:%S] ")
+  end
+
+  #
+  # Installs a sigint handler.
+  #
+  def add_sigint_handler
+    trap 'INT' do
+      puts '\nCancelled. Bye Bye!'
+      exit!
+    end
   end
 
 end
