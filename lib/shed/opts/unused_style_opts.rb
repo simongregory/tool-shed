@@ -10,7 +10,7 @@ class UnusedStyleOpts < ToolOpts
   end
 
   def self.description
-    " ActionScript Unused Style Detection Tool"
+    "ActionScript Unused Style Detection Tool"
   end
 
   def self.default_config

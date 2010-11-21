@@ -10,7 +10,7 @@ class UnusedAssetOpts < ToolOpts
   end
 
   def self.description
-    " ActionScript Unused Asset Detection Tool"
+    "ActionScript Unused Asset Detection Tool"
   end
 
   def self.default_config
