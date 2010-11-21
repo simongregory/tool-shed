@@ -13,6 +13,7 @@ class ManifestOptTest < Test::Unit::TestCase
       assert_equal 'manifest.xml', opts[:output]
       assert_equal '.', opts[:src]
       assert_equal false, opts[:verbose]
+
     end
 
     should "display a name" do
@@ -21,6 +22,20 @@ class ManifestOptTest < Test::Unit::TestCase
 
     should "describe itself" do
       assert_match(/\w+/, ManifestOpts.description)
+    end
+
+    should "define a filter when -f is set" do
+      fltr = 'org.helvector'
+      opts = ManifestOpts.parse ['-f', fltr]
+
+      assert_equal fltr, opts[:filter]
+    end
+
+    should "define a filter when --filter is set" do
+      fltr = 'org'
+      opts = ManifestOpts.parse ['--filter', fltr]
+
+      assert_equal fltr, opts[:filter]
     end
 
   end

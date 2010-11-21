@@ -13,6 +13,7 @@ class Manifest < Tool
     super(opt,out)
 
     @filetypes = /\.(as|mxml)$/
+    @filter = opt[:filter] || ''
 
     build
   end
@@ -45,9 +46,19 @@ class Manifest < Tool
       found << add(p, cn) if cn =~ /^[A-Z]/
     end
 
-    found.uniq! unless found.empty?
+    found = process(found) unless found.empty?
 
     found
+  end
+
+  #
+  # Proccesses the list to remove duplicates, sort alphabetically and reject any
+  # items that do not match the filter.
+  #
+  def process(list)
+    list.uniq!
+    list.sort! {|a,b| a[:xml] <=> b[:xml] }
+    list.select { |e| e[:xml].include?(@filter) }
   end
 
   #
@@ -59,9 +70,6 @@ class Manifest < Tool
     if @components.empty?
       puts "No ActionScript or Mxml files found."
     else
-
-      @components.sort! {|a,b| a[:xml] <=> b[:xml] }
-
       @xml = create_xml(@components)
 
       #Open/Create the manifest file and write the output to it.

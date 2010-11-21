@@ -81,6 +81,9 @@ class ToolOpts
     end
   end
 
+  #
+  # Add tail arguments to the options parser.
+  #
   def self.add_tail(op,out)
     op.on_tail("-h", "--help", "Show this help message") do
       out.puts op
