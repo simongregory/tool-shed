@@ -35,6 +35,8 @@ class UnusedStyle < Tool
     detect
 
     @report = describe
+
+    to_disk(@report)
   end
 
   def valid_opts
@@ -48,6 +50,8 @@ class UnusedStyle < Tool
   end
 
   def detect
+    puts "Scanning project for styles..."
+
     @declared = scan_dirs(/\.(css)/, @css_dir, @declared_regex)
     @used = scan_dirs(/\.(as|mxml)/, @src, @style_regex)
 
@@ -56,6 +60,11 @@ class UnusedStyle < Tool
 
     #Find any style names declared in the css but not used in the src.
     @unused = @declared-@used
+
+    puts "Declared styles: #{@declared.length.to_s}"
+    puts "Undeclared styles: #{@undeclared.length.to_s}"
+    puts "Used styles: #{@used.length.to_s}"
+    puts "Unused styles: #{@unused.length.to_s}"
   end
 
   private
@@ -64,7 +73,7 @@ class UnusedStyle < Tool
   # Returns a string detailing the findings of the style detection.
   #
   def describe
-    desc = "#{generated_at}"
+    desc = "#{generated_at} by as-style-detector"
     desc << add_desc("declared in CSS", @declared)
     desc << add_desc("used in MXML",@used)
     desc << add_desc("declared but not used (in a styleName property)",@unused)
@@ -76,8 +85,8 @@ class UnusedStyle < Tool
   # Prints a description category.
   #
   def add_desc(txt,list)
-    d = "\nStyles #{txt}: #{list.length.to_s}\n"
-    d << list.join("\n") unless list.empty?
+    d = "\n\nStyles #{txt}: #{list.length.to_s}\n\n\t"
+    d << list.join("\n\t") unless list.empty?
     d
   end
 
@@ -110,5 +119,4 @@ class UnusedStyle < Tool
     end
     n
   end
-
 end

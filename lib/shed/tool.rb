@@ -57,7 +57,7 @@ class Tool
   # Generate a timestamp to include in reports.
   #
   def generated_at
-    "Generated at" + Time.now.strftime(" [%m/%d/%Y %H:%M:%S] ")
+    "Generated at " + Time.now.strftime("[%m/%d/%Y %H:%M:%S]")
   end
 
   #

@@ -2,6 +2,7 @@
 
 require 'shed/tool'
 require 'shed/opts/tool_opts'
+require 'shed/opts/vacuum_opts'
 
 require 'shed/asdoc_package'
 require 'shed/manifest'

@@ -13,7 +13,8 @@ class TestUnusedStyle < Test::Unit::TestCase
     context "with correct arguments" do
       setup do
         opt = { :src => "#{fix}/src",
-                :css_dir => "#{fix}/css" }
+                :css_dir => "#{fix}/css",
+                :output => '/tmp/as-unused-style-tool.txt' }
 
         @out = StringIO.new
         @tool = UnusedStyle.new(opt,@out)
@@ -36,7 +37,8 @@ class TestUnusedStyle < Test::Unit::TestCase
     context "with incorrect arguments" do
       setup do
         opt = { :src => "#{fix}/src",
-                :css_dir => "#{fix}/src" }
+                :css_dir => "#{fix}/src",
+                :output => '/tmp/as-unused-style-tool.txt' }
 
         @out = StringIO.new
         @tool = UnusedStyle.new(opt,@out)
@@ -51,9 +53,11 @@ class TestUnusedStyle < Test::Unit::TestCase
     context "when given a css directory containing more than one css" do
       setup do
         opt = { :src => "#{fix}/src",
-                :css_dir => "#{fix}/css-multiple" }
+                :css_dir => "#{fix}/css-multiple",
+                :output => '/tmp/as-unused-style-tool.txt' }
 
-        @tool = UnusedStyle.new(opt)
+        @out = StringIO.new
+        @tool = UnusedStyle.new(opt,@out)
       end
 
       should "find declared styles" do
@@ -69,9 +73,11 @@ class TestUnusedStyle < Test::Unit::TestCase
     context "when searching css files for style definitions" do
       setup do
         opt = { :src => "#{fix}/src",
-                :css_dir => "#{fix}/css-with-comments" }
+                :css_dir => "#{fix}/css-with-comments",
+                :output => '/tmp/as-unused-style-tool.txt' }
 
-        @tool = UnusedStyle.new(opt)
+        @out = StringIO.new
+        @tool = UnusedStyle.new(opt,@out)
       end
 
       should "find basic declarations" do
@@ -87,9 +93,11 @@ class TestUnusedStyle < Test::Unit::TestCase
     context "when searching mxml documents for style useage" do
       setup do
         opt = { :src => "#{fix}/src",
-                :css_dir => "#{fix}/css" }
+                :css_dir => "#{fix}/css",
+                :output => '/tmp/as-unused-style-tool.txt' }
 
-        @tool = UnusedStyle.new(opt)
+        @out = StringIO.new
+        @tool = UnusedStyle.new(opt,@out)
       end
 
       should "find all values of syleName attributes" do
