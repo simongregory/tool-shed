@@ -47,7 +47,8 @@ class TestUnusedAsset < Test::Unit::TestCase
       end
 
       should "load the project link report and look for assets compiled into the application" do
-        #flunk("TODO")
+        #TODO
+        #flunk
       end
 
     end

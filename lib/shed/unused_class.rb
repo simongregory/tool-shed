@@ -65,9 +65,9 @@ class UnusedClass < Tool
   # Returns a string detailing the findings of the unused class detection.
   #
   def describe
-    d = generated_at
-    d << add_desc(" classes are in the manifest but not in the link report:", @unused_classes)
-    d << add_desc(" packages appear to be empty:", @empty_packages)
+    d = "as-class-vaccum Report. #{generated_at}\n\n"
+    d << add_desc("classes are in the manifest but not in the link report:", @unused_classes)
+    d << add_desc("packages appear to be empty:", @empty_packages)
     d
   end
 
@@ -76,7 +76,7 @@ class UnusedClass < Tool
   #
   def add_desc(txt,list)
     l = list.empty? ? '' : list.join("\n")
-    "#{list.length} #{txt}\n#{l}"
+    "#{list.length} #{txt}\n#{l}\n\n"
   end
 
   #

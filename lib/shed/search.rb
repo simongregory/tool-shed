@@ -31,20 +31,21 @@ module Search
   #
   # Scans the path and its children for empty directories.
   #
-  def self.for_empties(path,excluding=[])
+  def self.for_empties(dir,excluding=['.svn','.git'])
 
-    Find.find(path) do |p|
+    Find.find(dir) do |path|
 
-      if FileTest.directory?(p)
-        if excluding.include?(File.basename(p))
+      if FileTest.directory?(path)
+        if excluding.include?(File.basename(path))
           Find.prune
         else
           # Any dir that only contains ., .., and .svn or .git are empty.
-          yield p if Dir.entries(p).join =~ /^\.\.\.(\.(svn|git))?$/
+          yield path if Dir.entries(path).join =~ /^\.\.\.(\.(svn|git))?$/
         end
       end
 
     end
 
   end
+
 end
