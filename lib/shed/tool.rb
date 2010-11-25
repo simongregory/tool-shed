@@ -7,7 +7,7 @@
 #
 class Tool
 
-  INVALID_OPTS = "Warning Invalid Options."
+  INVALID_OPTS = "Invalid options:"
 
   def initialize(opt,out=STDOUT)
     @src      = opt[:src] || '.'

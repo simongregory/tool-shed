@@ -19,7 +19,7 @@ class ToolOpts
   # A basic description of the tools use.
   #
   def self.description
-    'Tool'
+    'Abstract tool from the tool shed.'
   end
 
   #
@@ -68,11 +68,11 @@ class ToolOpts
       config[:src] = v
     end
 
-    op.on("-o", "--output [FILE PATH]", String, "Path to output file, defaults to #{config[:output]}") do |v|
+    op.on("-o", "--output [FILE]", String, "Path to output file, defaults to #{config[:output]}.") do |v|
       config[:output] = v
     end
 
-    op.on("-v", "--verbose", "Run verbosely") do |v|
+    op.on("-v", "--verbose", "Run verbosely.") do |v|
       config[:verbose] = v
     end
 
@@ -85,12 +85,12 @@ class ToolOpts
   # Add tail arguments to the options parser.
   #
   def self.add_tail(op,out)
-    op.on_tail("-h", "--help", "Show this help message") do
+    op.on_tail("-h", "--help", "Show this help message.") do
       out.puts op
       exit
     end
 
-    op.on_tail("--version", "Show version") do
+    op.on_tail("--version", "Show version.") do
       out.puts "#{description} version #{version}"
       exit
     end

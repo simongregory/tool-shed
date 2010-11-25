@@ -5,12 +5,12 @@
 #
 class ManifestOpts < ToolOpts
 
-  def self.description
-    "ActionScript Manifest Generator Tool"
-  end
-
   def self.name
     "as-manifest"
+  end
+
+  def self.description
+    "ActionScript Manifest Generator Tool"
   end
 
   def self.default_config

@@ -13,7 +13,7 @@ class ASDocPackage < Tool
 
     @asdoc = /\.asdoc$/
 
-    @header = "<?xml version='1.0' encoding='utf-8'?>\n<flex-config>\n\t<packages>"
+    @header = "<?xml version='1.0' encoding='utf-8'?>\n<flex-config>\n\t<packages>\n"
     @package = "\t\t<package>\n\t\t\t<string>%s</string>\n\t\t\t<string><![CDATA[%s]]></string>\n\t\t</package>\n"
     @footer = "\t</packages>\n</flex-config>"
 
