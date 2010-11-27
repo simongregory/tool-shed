@@ -22,7 +22,7 @@ class UnusedClass < Tool
     @manifest_regex = /<component id="(\w+)"/
 
     unless valid_opts
-      @out.puts "#{INVALID_OPTS} One or all of the specified link report, manifest file, or source directory does not exist."
+      @out.puts "#{INVALID_OPTS} The link report, manifest file, or source directory does not exist."
       return
     end
 

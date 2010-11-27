@@ -12,12 +12,10 @@ class UnusedAsset < Tool
     super(opt,out)
 
     @src = opt[:src]
-    @assets = []
-    @src_files = []
-    @declared = []
+    @assets, @src_files, @declared = [], [], []
 
     unless valid_opts
-      @out.puts "#{INVALID_OPTS} One or all of specified asset and source directories does not exist."
+      @out.puts "#{INVALID_OPTS} The source directory does not exist."
       return
     end
 
@@ -36,6 +34,8 @@ class UnusedAsset < Tool
   end
 
   def detect
+    puts "Scanning project for assets that are unused..."
+
     Search.find_all(/\.(jpg|jpeg|png|otf|ttf|swf|svg|mp3|gif)$/,@src,@excludes) do |path|
       @assets << path
     end
@@ -48,9 +48,19 @@ class UnusedAsset < Tool
     @unused = []
 
     @assets.each { |ass| @unused << ass unless is_asset_used(ass) }
+
+    summarise
   end
 
   private
+
+  #
+  # Summarise the collected data.
+  #
+  def summarise
+    puts "Used assets: #{@declared.length.to_s}"
+    puts "Unused assets: #{@unused.length.to_s}"
+  end
 
   #
   # Returns a string detailing the findings of the style detection.

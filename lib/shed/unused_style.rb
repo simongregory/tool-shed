@@ -25,10 +25,10 @@ class UnusedStyle < Tool
     @style_regex = /styleName\s*=\s*["']\s*\{?\s*([\w.]+)\s*\}?\s*["']/
     @declared_regex = /^\.(\w+)/
 
-    @declared, @used, @unused, @undeclared = []
+    @declared, @used, @unused, @undeclared = [], [], [], []
 
     unless valid_opts
-      @out.puts "#{INVALID_OPTS} The directory specified as containging css files does not exist, or does not contain css files."
+      @out.puts "#{INVALID_OPTS} The specified css directory does not exist, or does not contain css files."
       return
     end
 
@@ -71,11 +71,10 @@ class UnusedStyle < Tool
   # Summarise the collected data.
   #
   def summarise
-    summary = "Declared styles: #{@declared.length.to_s}"
-    summary << "Undeclared styles: #{@undeclared.length.to_s}"
-    summary << "Used styles: #{@used.length.to_s}"
-    summary << "Unused styles: #{@unused.length.to_s}"
-    puts summary
+    puts "Declared styles: #{@declared.length.to_s}"
+    puts "Undeclared styles: #{@undeclared.length.to_s}"
+    puts "Used styles: #{@used.length.to_s}"
+    puts "Unused styles: #{@unused.length.to_s}"
   end
 
   #

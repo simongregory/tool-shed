@@ -14,7 +14,7 @@ class Tool
     @output   = opt[:output] || 'tool-shed.txt'
     @verbose  = opt[:verbose] || false
     @silent   = opt[:silent] || false
-    @excludes = opt[:excludes] || ['.svn','.git']
+    @excludes = opt[:excludes] || ['.svn','.git', 'bin', 'bin-debug']
     @out      = out
 
     add_sigint_handler
