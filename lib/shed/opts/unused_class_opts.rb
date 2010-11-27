@@ -10,7 +10,7 @@ class UnusedClassOpts < VacuumOpts
   end
 
   def self.description
-    "ActionScript unused class detection tool"
+    "ActionScript Unused Class Detection Tool"
   end
 
   def self.default_config

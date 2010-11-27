@@ -11,7 +11,7 @@ class UnusedAsset < Tool
   def initialize(opt,out=STDOUT)
     super(opt,out)
 
-    @project_dir = opt[:project_dir] || opt[:src] #remove src or refactor project_dir out
+    @src = opt[:src]
     @assets = []
     @src_files = []
     @declared = []
@@ -32,17 +32,17 @@ class UnusedAsset < Tool
   # Valid if the specified project directory exists.
   #
   def valid_opts
-    File.exist?(@project_dir) rescue false
+    File.exist?(@src) rescue false
   end
 
   def detect
-    Search.find_all(/\.(jpg|jpeg|png|otf|ttf|swf|svg|mp3|gif)$/,@project_dir,@excludes) do |path|
+    Search.find_all(/\.(jpg|jpeg|png|otf|ttf|swf|svg|mp3|gif)$/,@src,@excludes) do |path|
       @assets << path
     end
 
-    src_dec = scan_dirs(/\.(as|mxml|css)$/, @project_dir, /Embed\(source=['"]([\w._\-\/]+)['"]/)
-    css_dec = scan_dirs(/\.(css)$/, @project_dir, /:\s*url\(\s*['"](.*)['"]/)
-    mxml_dec = scan_dirs(/\.(mxml)$/, @project_dir, /@Embed\(['"]([\w._\-\/]+)['"]/)
+    src_dec = scan_dirs(/\.(as|mxml|css)$/, @src, /Embed\(source=['"]([\w._\-\/]+)['"]/)
+    css_dec = scan_dirs(/\.(css)$/, @src, /:\s*url\(\s*['"](.*)['"]/)
+    mxml_dec = scan_dirs(/\.(mxml)$/, @src, /@Embed\(['"]([\w._\-\/]+)['"]/)
 
     @declared = src_dec + css_dec + mxml_dec
     @unused = []

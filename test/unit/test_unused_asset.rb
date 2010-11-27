@@ -12,7 +12,7 @@ class TestUnusedAsset < Test::Unit::TestCase
 
     context "with correct arguments" do
       setup do
-        opt = { :project_dir => "#{fix}",
+        opt = { :src => "#{fix}",
                 :output => "/tmp/as-unused-asset-tool.txt" }
 
         @out = StringIO.new
@@ -63,7 +63,7 @@ class TestUnusedAsset < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:project_dir => "INVALID", :output => "/tmp/as-unused-asset-tool.txt"}
+        opt = {:src => "INVALID", :output => "/tmp/as-unused-asset-tool.txt"}
         @out = StringIO.new
         @tool = UnusedAsset.new(opt,@out)
       end
