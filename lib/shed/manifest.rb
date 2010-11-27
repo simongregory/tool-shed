@@ -34,16 +34,16 @@ class Manifest < Tool
   # Search the provided path for as and mxml documents and return those found as
   # a list.
   #
-  def scan(path)
-    puts "Scanning '#{path}' for as and mxml files..."
+  def scan(dir)
+    puts "Scanning '#{dir}' for as and mxml files..."
 
     found = []
 
-    Search.find_all(@filetypes,path,@excludes) do |p|
-      ext = File.extname(p)
-      cn = File.basename(p, ext)
+    Search.find_all(@filetypes,dir,@excludes) do |path|
+      ext = File.extname(path)
+      name = File.basename(path, ext)
 
-      found << add(p, cn) if cn =~ /^[A-Z]/
+      found << add(path, name) if name =~ /^[A-Z]/
     end
 
     found = process(found) unless found.empty?
@@ -70,10 +70,10 @@ class Manifest < Tool
     if @components.empty?
       puts "No ActionScript or Mxml files found."
     else
-      @xml = create_xml(@components)
+      create_xml(@components)
 
       #Open/Create the manifest file and write the output to it.
-      to_disk(@xml)
+      to_disk(xml)
     end
   end
 
@@ -82,9 +82,8 @@ class Manifest < Tool
   # files.
   #
   def create_xml(comps)
-    x = "<?xml version='1.0'?>\n<componentPackage>\n"
-    comps.each { |c| x << "\t#{c[:xml]}\n" }
-    x << "</componentPackage>"
-    x
+    @xml = "<?xml version='1.0'?>\n<componentPackage>\n"
+    comps.each { |component| @xml << "\t#{component[:xml]}\n" }
+    @xml << "</componentPackage>"
   end
 end

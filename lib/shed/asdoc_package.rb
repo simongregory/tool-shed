@@ -23,16 +23,16 @@ class ASDocPackage < Tool
   #
   # Scan the given path and it's child directories for all .asdoc files.
   #
-  def scan(path)
-    puts "Scanning '#{path}' for asdoc files..."
+  def scan(dir)
+    puts "Scanning '#{dir}' for asdoc files..."
 
     found = []
 
-    Search.find_all(@asdoc,path,@excludes) do |p|
-      found << {:path => p, :package => ProjectTools.package(p)}
+    Search.find_all(@asdoc,dir,@excludes) do |path|
+      found << {:path => path, :package => ProjectTools.package(path)}
     end
 
-    found.each { |f| log("Adding #{f[:path]}") }
+    found.each { |file| log("Adding #{file[:path]}") }
 
     found
   end
@@ -46,8 +46,8 @@ class ASDocPackage < Tool
     if asdocs.empty?
       puts "No .asdoc files found."
     else
-      @xml = create_xml(asdocs)
-      to_disk(@xml)
+      create_xml(asdocs)
+      to_disk(xml)
     end
   end
 
@@ -56,9 +56,9 @@ class ASDocPackage < Tool
   # files.
   #
   def create_xml(asdocs)
-    x = @header
-    asdocs.each { |d| x << sprintf(@package, d[:package], IO.read(d[:path])) }
-    x << @footer
-    x
+    @xml = @header
+    asdocs.each { |asdoc| @xml << sprintf(@package, asdoc[:package], IO.read(asdoc[:path])) }
+    @xml << @footer
+    @xml
   end
 end

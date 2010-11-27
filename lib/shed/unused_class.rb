@@ -46,38 +46,36 @@ class UnusedClass < Tool
     @unused_classes = @manifest_classes-@link_classes
     @empty_packages = empties(@src)
 
-    puts "Unused classes: #{@unused_classes.length.to_s}"
-    puts "Empty packages: #{@empty_packages.length.to_s}"
+    summarise
   end
 
   private
 
   #
+  # Summarise the collected data.
+  #
+  def summarise
+    puts "Unused classes: #{@unused_classes.length.to_s}"
+    puts "Empty packages: #{@empty_packages.length.to_s}"
+  end
+
+  #
   # Scans the path for empty directories and lists them.
   #
   def empties(path)
-    e = []
-    Search.for_empties(path) { |p| e << p.sub( /^.*src\//, "") }
-    e
+    empties = []
+    Search.for_empties(path) { |path| empties << path.sub( /^.*src\//, "") }
+    empties
   end
 
   #
   # Returns a string detailing the findings of the unused class detection.
   #
   def describe
-    d = "#{generated_at} by as-class-detector"
-    d << add_desc("Classes in the manifest but not the link report", @unused_classes)
-    d << add_desc("Packages appear to be empty", @empty_packages)
-    d
-  end
-
-  #
-  # Prints a description category.
-  #
-  def add_desc(txt,list)
-    d = "\n\n#{txt}: #{list.length.to_s}\n\n\t"
-    d << list.join("\n\t") unless list.empty?
-    d
+    desc = "#{generated_at} by as-class-detector"
+    desc << add_desc("Classes in the manifest but not the link report", @unused_classes)
+    desc << add_desc("Packages appear to be empty", @empty_packages)
+    desc
   end
 
   #

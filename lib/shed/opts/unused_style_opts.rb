@@ -23,8 +23,8 @@ class UnusedStyleOpts < ToolOpts
   def self.add_mandatory(op,config)
     superclass.add_mandatory(op,config)
 
-    op.on("-c", "--css PATH", "Path to the directory containing css file/s.") do |v|
-      config[:css_dir] = v
+    op.on("-c", "--css PATH", "Path to the directory containing css file/s.") do |value|
+      config[:css_dir] = value
     end
   end
 

@@ -39,12 +39,13 @@ class UnusedStyle < Tool
     to_disk(@report)
   end
 
+  #
+  # Valid if we can find .css files in the specifed css_dir.
+  #
   def valid_opts
     return false unless File.exist?(@css_dir)
 
-    found = Dir.chdir("#{@css_dir}") do |d|
-      Dir.glob('*.css')
-    end
+    found = Dir.chdir("#{@css_dir}") { Dir.glob('*.css') }
 
     found.length > 0
   end
@@ -61,62 +62,32 @@ class UnusedStyle < Tool
     #Find any style names declared in the css but not used in the src.
     @unused = @declared-@used
 
-    puts "Declared styles: #{@declared.length.to_s}"
-    puts "Undeclared styles: #{@undeclared.length.to_s}"
-    puts "Used styles: #{@used.length.to_s}"
-    puts "Unused styles: #{@unused.length.to_s}"
+    summarise
   end
 
   private
+
+  #
+  # Summarise the collected data.
+  #
+  def summarise
+    summary = "Declared styles: #{@declared.length.to_s}"
+    summary << "Undeclared styles: #{@undeclared.length.to_s}"
+    summary << "Used styles: #{@used.length.to_s}"
+    summary << "Unused styles: #{@unused.length.to_s}"
+    puts summary
+  end
 
   #
   # Returns a string detailing the findings of the style detection.
   #
   def describe
     desc = "#{generated_at} by as-style-detector"
-    desc << add_desc("declared in CSS", @declared)
-    desc << add_desc("used in MXML",@used)
-    desc << add_desc("declared but not used (in a styleName property)",@unused)
-    desc << add_desc("used but not declared",@undeclared)
+    desc << add_desc("Styles declared in CSS", @declared)
+    desc << add_desc("Styles used in MXML",@used)
+    desc << add_desc("Styles declared but not used (in a styleName property)",@unused)
+    desc << add_desc("Styles used but not declared",@undeclared)
     desc
   end
 
-  #
-  # Prints a description category.
-  #
-  def add_desc(txt,list)
-    d = "\n\nStyles #{txt}: #{list.length.to_s}\n\n\t"
-    d << list.join("\n\t") unless list.empty?
-    d
-  end
-
-  #
-  # Scans directories for all files that match the file extension regex, and
-  # for each match goes on to scan that document for items matching the syntax
-  # regex.
-  #
-  def scan_dirs(extension_regex,path,syntax_regex)
-    d = []
-
-    Search.find_all(extension_regex,path,@excludes) do |path|
-      d << scan_doc(path,syntax_regex)
-    end
-
-    d.flatten!.sort!.uniq! unless d.empty?
-    d
-  end
-
-  #
-  # Opens the document specified by path and returns a list of all first capture
-  # group matches, after stripping comments.
-  #
-  def scan_doc(path,regex)
-    n = []
-    f = File.open(path,"r").read.strip
-    f = Stripper.comments(f)
-    f.scan(regex) do |style_name|
-      n << $1
-    end
-    n
-  end
 end

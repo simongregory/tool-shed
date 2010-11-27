@@ -16,12 +16,12 @@ class VacuumOpts < ToolOpts
   def self.add_mandatory(op,config)
     superclass.add_mandatory(op,config)
 
-    op.on("-m", "--manifest FILE", "Path to the source manifest file.") do |v|
-      config[:manifest] = v
+    op.on("-m", "--manifest FILE", "Path to the source manifest file.") do |value|
+      config[:manifest] = value
     end
 
-    op.on("-l", "--link-report FILE", "Path to the compiler link-report file.") do |v|
-      config[:link_report] = v
+    op.on("-l", "--link-report FILE", "Path to the compiler link-report file.") do |value|
+      config[:link_report] = value
     end
   end
 end

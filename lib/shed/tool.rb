@@ -45,10 +45,10 @@ class Tool
   # Write the requested string to the output file.
   #
   def to_disk(str)
-    f = File.open(@output, "w")
-    f.puts str
-    f.flush
-    f.close
+    file = File.open(@output, "w")
+    file.puts str
+    file.flush
+    file.close
 
     puts "Saved result to #{File.expand_path(@output)}."
   end
@@ -70,4 +70,41 @@ class Tool
     end
   end
 
+  protected
+
+  #
+  # Describes a list of collected data.
+  #
+  def add_desc(heading,list)
+    description = "\n\n#{heading}: #{list.length.to_s}\n\n\t"
+    description << list.join("\n\t") unless list.empty?
+    description
+  end
+
+  #
+  # Opens the document specified by path and returns a list of all first capture
+  # group matches, after stripping comments.
+  #
+  def scan_doc(path,regex)
+    caputres = []
+    file = File.open(path,"r").read.strip
+    file = Stripper.comments(file)
+    file.scan(regex) { caputres << $1 }
+    caputres
+  end
+
+  #
+  # Scans directories for all files that match the regex, and for each match
+  # goes on to scan that document for items matching the syntax regex.
+  #
+  def scan_dirs(extension,dir,syntax_regex)
+    declarations = []
+
+    Search.find_all(extension,dir,@excludes) do |path|
+      declarations << scan_doc(path,syntax_regex)
+    end
+
+    declarations.flatten!.sort!.uniq! unless declarations.empty?
+    declarations
+  end
 end

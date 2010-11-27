@@ -21,8 +21,8 @@ class ManifestOpts < ToolOpts
 
   def self.add_optional(op,config)
     superclass.add_optional(op,config)
-    op.on("-f", "--filter [STRING]", String, "Package filter, in the form of 'org.helvector', to include in the generated manifest.") do |v|
-      config[:filter] = v
+    op.on("-f", "--filter [STRING]", String, "Package filter, in the form of 'org.helvector', to include in the generated manifest.") do |value|
+      config[:filter] = value
     end
   end
 

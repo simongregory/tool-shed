@@ -6,7 +6,7 @@
 # no longer used by the application.
 #
 class UnusedAsset < Tool
-  attr_reader :assets, :src_files, :declared, :unused
+  attr_reader :assets, :declared, :unused
 
   def initialize(opt,out=STDOUT)
     super(opt,out)
@@ -25,19 +25,20 @@ class UnusedAsset < Tool
 
     detect
 
-    #@report = describe
+    @report = describe
 
-    #to_disk(@report)
+    to_disk(@report)
   end
 
+  #
+  # Valid if the specified project directory exists.
+  #
   def valid_opts
     File.exist?(@project_dir) rescue false
   end
 
-  private
-
   def detect
-    Search.find_all(/\.(jpg|jpeg|png|otf)$/,@project_dir,@excludes) do |path|
+    Search.find_all(/\.(jpg|jpeg|png|otf|ttf)$/,@project_dir,@excludes) do |path|
       @assets << path
     end
 
@@ -45,49 +46,28 @@ class UnusedAsset < Tool
 
     @unused = []
 
-    @assets.each { |a|
-      @unused << a unless is_used(a)
-    }
+    @assets.each { |ass| @unused << ass unless is_asset_used(ass) }
   end
 
-  def is_used(file)
+  private
+
+  #
+  # Returns a string detailing the findings of the style detection.
+  #
+  def describe
+    desc = "#{generated_at} by as-asset-detector"
+    desc << add_desc("Assets declared in src", @declared)
+    desc
+  end
+
+  def is_asset_used(file)
     used = false
-    @declared.each { |f|
-      if File.basename(f) == File.basename(file)
+    @declared.each { |declaration|
+      if File.basename(declaration) == File.basename(file)
         used = true
       end
     }
     used
   end
 
-  #
-  # Scans directories for all files that match the file extension regex, and
-  # for each match goes on to scan that document for items matching the syntax
-  # regex.
-  #
-  def scan_dirs(file_ext_regex,path,syntax_regex)
-    d = []
-
-    Search.find_all(file_ext_regex,path,@excludes) do |p|
-      @src_files << p
-      d << scan_doc(p,syntax_regex)
-    end
-
-    d.flatten!.sort!.uniq! unless d.empty?
-    d
-  end
-
-  #
-  # Opens the document specified by path and returns a list of all first capture
-  # group matches, after stripping comments.
-  #
-  def scan_doc(path,regex)
-    n = []
-    f = File.open(path,"r").read.strip
-    f = Stripper.comments(f)
-    f.scan(regex) do |style_name|
-      n << $1
-    end
-    n
-  end
 end

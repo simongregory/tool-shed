@@ -64,20 +64,20 @@ class ToolOpts
   # Add all optional arguments to the options parser.
   #
   def self.add_optional(op,config)
-    op.on("-s", "--source [PATH]", String, "Path to source folder, defaults to current directory.") do |v|
-      config[:src] = v
+    op.on("-s", "--source [PATH]", String, "Path to source folder, defaults to current directory.") do |value|
+      config[:src] = value
     end
 
-    op.on("-o", "--output [FILE]", String, "Path to output file, defaults to #{config[:output]}.") do |v|
-      config[:output] = v
+    op.on("-o", "--output [FILE]", String, "Path to output file, defaults to #{config[:output]}.") do |value|
+      config[:output] = value
     end
 
-    op.on("-v", "--verbose", "Run verbosely.") do |v|
-      config[:verbose] = v
+    op.on("-v", "--verbose", "Run verbosely.") do |value|
+      config[:verbose] = value
     end
 
-    op.on("--silent", "Supress all output.") do |v|
-      config[:silent] = v
+    op.on("--silent", "Supress all output.") do |value|
+      config[:silent] = value
     end
   end
 

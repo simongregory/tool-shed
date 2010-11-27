@@ -12,7 +12,8 @@ class TestUnusedAsset < Test::Unit::TestCase
 
     context "with correct arguments" do
       setup do
-        opt = { :project_dir => "#{fix}" }
+        opt = { :project_dir => "#{fix}",
+                :output => "/tmp/as-unused-asset-tool.txt" }
 
         @out = StringIO.new
         @tool = UnusedAsset.new(opt,@out)
@@ -23,13 +24,6 @@ class TestUnusedAsset < Test::Unit::TestCase
         assert_match(/\.jpg/, @tool.assets.to_s)
         assert_match(/\.png/, @tool.assets.to_s)
         assert_match(/\.otf/, @tool.assets.to_s)
-      end
-
-      should "locate all src files in the project" do
-        assert_equal(4, @tool.src_files.length)
-        assert_match(/\.mxml/, @tool.src_files.to_s)
-        assert_match(/\.as/, @tool.src_files.to_s)
-        assert_match(/\.css/, @tool.src_files.to_s)
       end
 
       should "search all loaded src files for asset references and store them in a list" do
@@ -55,7 +49,7 @@ class TestUnusedAsset < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:project_dir => "INVALID"}
+        opt = {:project_dir => "INVALID", :output => "/tmp/as-unused-asset-tool.txt"}
         @out = StringIO.new
         @tool = UnusedAsset.new(opt,@out)
       end
