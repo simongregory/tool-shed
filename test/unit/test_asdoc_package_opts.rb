@@ -10,7 +10,7 @@ class ASDocPackageOptsTest < Test::Unit::TestCase
       args = []
       opts = ASDocPackageOpts.parse(args)
 
-      assert_equal 'package-asdoc.xml', opts[:output]
+      assert_equal 'asdoc-package-config.xml', opts[:output]
       assert_equal '.', opts[:src]
       assert_equal false, opts[:verbose]
     end

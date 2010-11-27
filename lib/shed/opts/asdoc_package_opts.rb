@@ -15,7 +15,7 @@ class ASDocPackageOpts < ToolOpts
 
   def self.default_config
     dc = superclass.default_config
-    dc[:output] = 'package-asdoc.xml'
+    dc[:output] = 'asdoc-package-config.xml'
     dc
   end
 
