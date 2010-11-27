@@ -10,7 +10,7 @@
 # NOTE: This tool needs further work before it can be considerd to cover all
 #       use cases.
 #
-class UnusedStyle < Tool
+class StyleVacuum < Tool
   attr_reader :report,
               :declared,
               :used,
@@ -81,7 +81,7 @@ class UnusedStyle < Tool
   # Returns a string detailing the findings of the style detection.
   #
   def describe
-    desc = "#{generated_at} by as-style-detector"
+    desc = "#{generated_at} by as-style-vacuum"
     desc << add_desc("Styles declared in CSS", @declared)
     desc << add_desc("Styles used in MXML",@used)
     desc << add_desc("Styles declared but not used (in a styleName property)",@unused)

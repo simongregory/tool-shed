@@ -1,16 +1,16 @@
 # encoding: utf-8
 
 #
-# Manages the command line interface for the unused assets detection tool.
+# Manages the command line interface for the assets vacuum tool.
 #
-class UnusedAssetOpts < ToolOpts
+class AssetVacuumOpts < ToolOpts
 
   def self.name
-    "as-asset-detector"
+    "as-asset-vacuum"
   end
 
   def self.description
-    "ActionScript Unused Asset Detection Tool"
+    "ActionScript Asset Vacuum Tool"
   end
 
   def self.default_config

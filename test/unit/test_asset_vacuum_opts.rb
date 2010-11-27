@@ -2,14 +2,14 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class UnusedAssetOptsTest < Test::Unit::TestCase
+class TestAssetVacuumOpts < Test::Unit::TestCase
 
-  context "A Unused Asset Tool Options Parser" do
+  context "An Asset Vacuum Tool Options Parser" do
 
     should "return default hash if no arguments are specified" do
 
       args = []
-      opts = UnusedAssetOpts.parse(args)
+      opts = AssetVacuumOpts.parse(args)
 
       assert_equal 'assets.txt', opts[:output]
       assert_equal '.', opts[:src]
@@ -18,11 +18,11 @@ class UnusedAssetOptsTest < Test::Unit::TestCase
     end
 
     should "display a name" do
-      assert_match(/\w+/, UnusedAssetOpts.name)
+      assert_match(/\w+/, AssetVacuumOpts.name)
     end
 
     should "describe itself" do
-      assert_match(/\w+/, UnusedAssetOpts.description)
+      assert_match(/\w+/, AssetVacuumOpts.description)
     end
 
   end

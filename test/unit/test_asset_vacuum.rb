@@ -2,21 +2,21 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class TestUnusedAsset < Test::Unit::TestCase
+class TestAssetVacuum < Test::Unit::TestCase
 
   def fix
     File.expand_path(File.dirname(__FILE__)+ "/../fixtures/unused-asset")
   end
 
-  context "A unused asset detector" do
+  context "A asset vacuum tool" do
 
     context "with correct arguments" do
       setup do
         opt = { :src => "#{fix}",
-                :output => "/tmp/as-unused-asset-tool.txt" }
+                :output => "/tmp/as-asset-vacuum.txt" }
 
         @out = StringIO.new
-        @tool = UnusedAsset.new(opt,@out)
+        @tool = AssetVacuum.new(opt,@out)
       end
 
       should "find all assets in the project" do
@@ -63,13 +63,13 @@ class TestUnusedAsset < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:src => "INVALID", :output => "/tmp/as-unused-asset-tool.txt"}
+        opt = {:src => "INVALID", :output => "/tmp/as-asset-vacuum.txt"}
         @out = StringIO.new
-        @tool = UnusedAsset.new(opt,@out)
+        @tool = AssetVacuum.new(opt,@out)
       end
 
       should "fail with a warning message" do
-        assert_match(/#{UnusedAsset::INVALID_OPTS}/, @out.string)
+        assert_match(/#{AssetVacuum::INVALID_OPTS}/, @out.string)
       end
     end
   end

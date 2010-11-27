@@ -1,16 +1,16 @@
 # encoding: utf-8
 
 #
-# Manages the command line interface for the unused style detection tool.
+# Manages the command line interface for the style vacuum tool.
 #
-class UnusedStyleOpts < ToolOpts
+class StyleVacuumOpts < ToolOpts
 
   def self.name
-    "as-style-detector"
+    "as-style-vacuum"
   end
 
   def self.description
-    "ActionScript Unused Style Detection Tool"
+    "ActionScript Style Vacuum Tool"
   end
 
   def self.default_config

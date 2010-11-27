@@ -6,8 +6,8 @@ require 'tool_shed'
 
 begin
 
-  opt = UnusedStyleOpts.parse(ARGV)
-  UnusedStyle.new(opt)
+  opt = StyleVacuumOpts.parse(ARGV)
+  StyleVacuum.new(opt)
 
 rescue OptionParser::ParseError => e
 

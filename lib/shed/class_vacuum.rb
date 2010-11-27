@@ -8,7 +8,7 @@
 # Before executing this script make sure the relevant link reports and manifest
 # files have been generated.
 #
-class UnusedClass < Tool
+class ClassVacuum < Tool
   attr_reader :report,
               :empty_packages,
               :unused_classes
@@ -69,10 +69,10 @@ class UnusedClass < Tool
   end
 
   #
-  # Returns a string detailing the findings of the unused class detection.
+  # Returns a string detailing the findings of the class vacuumer.
   #
   def describe
-    desc = "#{generated_at} by as-class-detector"
+    desc = "#{generated_at} by as-class-vacuum"
     desc << add_desc("Classes in the manifest but not the link report", @unused_classes)
     desc << add_desc("Packages appear to be empty", @empty_packages)
     desc

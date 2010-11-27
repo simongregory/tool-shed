@@ -6,8 +6,8 @@ require 'tool_shed'
 
 begin
 
-  opt = UnusedAssetOpts.parse(ARGV)
-  UnusedAsset.new(opt)
+  opt = VacuumOpts.parse(ARGV)
+  Vacuum.new(opt)
 
 rescue OptionParser::ParseError => e
 

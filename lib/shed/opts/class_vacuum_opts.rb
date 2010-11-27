@@ -1,21 +1,21 @@
 # encoding: utf-8
 
 #
-# Manages the command line interface for the unused classes detection tool.
+# Manages the command line interface for the class vacuum tool.
 #
-class UnusedClassOpts < ToolOpts
+class ClassVacuumOpts < ToolOpts
 
   def self.name
-    "as-class-detector"
+    "as-class-vacuum"
   end
 
   def self.description
-    "ActionScript Unused Class Detection Tool"
+    "ActionScript Class Vacuum Tool"
   end
 
   def self.default_config
     dc = superclass.default_config
-    dc[:output] = 'class-vaccum.txt'
+    dc[:output] = 'class-vacuum.txt'
     dc[:manifest] = 'manifest.xml'
     dc[:link_report] = 'link-report.xml'
     dc

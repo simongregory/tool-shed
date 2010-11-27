@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+
+require 'tool_shed'
+
+begin
+
+  opt = ClassVacuumOpts.parse(ARGV)
+  ClassVacuum.new(opt)
+
+rescue OptionParser::ParseError => e
+
+  puts e
+
+end

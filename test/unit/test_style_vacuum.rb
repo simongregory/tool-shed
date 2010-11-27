@@ -2,22 +2,22 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class TestUnusedStyle < Test::Unit::TestCase
+class TestStyleVacuum < Test::Unit::TestCase
 
   def fix
     File.expand_path(File.dirname(__FILE__)+ "/../fixtures/unused-css")
   end
 
-  context "A  unused style detector" do
+  context "A style vacuum tool" do
 
     context "with correct arguments" do
       setup do
         opt = { :src => "#{fix}/src",
                 :css_dir => "#{fix}/css",
-                :output => '/tmp/as-unused-style-tool.txt' }
+                :output => '/tmp/as-style-vacuum.txt' }
 
         @out = StringIO.new
-        @tool = UnusedStyle.new(opt,@out)
+        @tool = StyleVacuum.new(opt,@out)
       end
 
       should "find declared styles" do
@@ -38,14 +38,14 @@ class TestUnusedStyle < Test::Unit::TestCase
       setup do
         opt = { :src => "#{fix}/src",
                 :css_dir => "#{fix}/src",
-                :output => '/tmp/as-unused-style-tool.txt' }
+                :output => '/tmp/as-style-vacuum.txt' }
 
         @out = StringIO.new
-        @tool = UnusedStyle.new(opt,@out)
+        @tool = StyleVacuum.new(opt,@out)
       end
 
       should "fail with a warning message" do
-        assert_match(/#{UnusedStyle::INVALID_OPTS}/, @out.string)
+        assert_match(/#{StyleVacuum::INVALID_OPTS}/, @out.string)
         assert_equal(false, @tool.valid_opts)
       end
     end
@@ -54,10 +54,10 @@ class TestUnusedStyle < Test::Unit::TestCase
       setup do
         opt = { :src => "#{fix}/src",
                 :css_dir => "#{fix}/css-multiple",
-                :output => '/tmp/as-unused-style-tool.txt' }
+                :output => '/tmp/as-style-vacuum.txt' }
 
         @out = StringIO.new
-        @tool = UnusedStyle.new(opt,@out)
+        @tool = StyleVacuum.new(opt,@out)
       end
 
       should "find declared styles" do
@@ -67,17 +67,16 @@ class TestUnusedStyle < Test::Unit::TestCase
       should "find unused styles" do
         assert @tool.unused.length == 3
       end
-
     end
 
     context "when searching css files for style definitions" do
       setup do
         opt = { :src => "#{fix}/src",
                 :css_dir => "#{fix}/css-with-comments",
-                :output => '/tmp/as-unused-style-tool.txt' }
+                :output => '/tmp/as-style-vacuum.txt' }
 
         @out = StringIO.new
-        @tool = UnusedStyle.new(opt,@out)
+        @tool = StyleVacuum.new(opt,@out)
       end
 
       should "find basic declarations" do
@@ -94,16 +93,15 @@ class TestUnusedStyle < Test::Unit::TestCase
       setup do
         opt = { :src => "#{fix}/src",
                 :css_dir => "#{fix}/css",
-                :output => '/tmp/as-unused-style-tool.txt' }
+                :output => '/tmp/as-style-vacuum.txt' }
 
         @out = StringIO.new
-        @tool = UnusedStyle.new(opt,@out)
+        @tool = StyleVacuum.new(opt,@out)
       end
 
       should "find all values of syleName attributes" do
         assert @tool.used.length == 2
       end
-
     end
 
   end

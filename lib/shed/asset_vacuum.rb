@@ -5,7 +5,7 @@
 # identify assets, like PNG files, that are in the project source tree but are
 # no longer used by the application.
 #
-class UnusedAsset < Tool
+class AssetVacuum < Tool
   attr_reader :assets, :declared, :unused
 
   def initialize(opt,out=STDOUT)
@@ -66,7 +66,7 @@ class UnusedAsset < Tool
   # Returns a string detailing the findings of the style detection.
   #
   def describe
-    desc = "#{generated_at} by as-asset-detector"
+    desc = "#{generated_at} by as-asset-vacuum"
     desc << add_desc("Assets declared in src", @declared)
     desc << add_desc("Assets found in project but not referenced in source", @unused)
     desc

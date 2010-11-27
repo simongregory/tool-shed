@@ -2,9 +2,9 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class TestUnusedClass < Test::Unit::TestCase
+class TestClassVacuum < Test::Unit::TestCase
 
-  context "A unused class detector" do
+  context "A class vacuum tool" do
 
     context "with correct arguments" do
       setup do
@@ -12,10 +12,10 @@ class TestUnusedClass < Test::Unit::TestCase
         opt = { :src => "#{fix}/src",
                 :manifest => "#{fix}/manifest.xml",
                 :link_report => "#{fix}/link-report.xml",
-                :output => '/tmp/hel-unused-class-tool.txt' }
+                :output => '/tmp/as-class-vacuum.txt' }
 
         @out = StringIO.new
-        @tool = UnusedClass.new(opt,@out)
+        @tool = ClassVacuum.new(opt,@out)
       end
 
       should "find unused classes" do
@@ -35,13 +35,13 @@ class TestUnusedClass < Test::Unit::TestCase
 
     context "with incorrect arguments" do
       setup do
-        opt = {:manifest => "INVALID", :output => '/tmp/unused-class-tool.txt'}
+        opt = {:manifest => "INVALID", :output => '/tmp/as-class-vacuum.txt'}
         @out = StringIO.new
-        @tool = UnusedClass.new(opt,@out)
+        @tool = ClassVacuum.new(opt,@out)
       end
 
       should "fail with a warning message" do
-        assert_match(/#{UnusedClass::INVALID_OPTS}/, @out.string)
+        assert_match(/#{ClassVacuum::INVALID_OPTS}/, @out.string)
       end
     end
 
