@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
+    
+    <mx:Style source="/../assets/css/referenced-in-mxml.css"/>
+    
+    <mx:Image source="@Embed('/../assets/img/referenced.gif')"/>
+    <mx:Image source='@Embed("/../assets/img/referenced.svg")'/>
 	
 </mx:Canvas>

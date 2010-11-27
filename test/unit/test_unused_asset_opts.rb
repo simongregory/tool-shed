@@ -12,8 +12,6 @@ class UnusedAssetOptsTest < Test::Unit::TestCase
       opts = UnusedAssetOpts.parse(args)
 
       assert_equal 'assets.txt', opts[:output]
-      assert_equal 'manifest.xml', opts[:manifest]
-      assert_equal 'link-report.xml', opts[:link_report]
       assert_equal '.', opts[:src]
       assert_equal false, opts[:verbose]
 

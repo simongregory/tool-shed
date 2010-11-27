@@ -21,8 +21,6 @@ class UnusedAsset < Tool
       return
     end
 
-    @declared_regex = /Embed\(source='([\w.\/]+)'/
-
     detect
 
     @report = describe
@@ -38,12 +36,15 @@ class UnusedAsset < Tool
   end
 
   def detect
-    Search.find_all(/\.(jpg|jpeg|png|otf|ttf)$/,@project_dir,@excludes) do |path|
+    Search.find_all(/\.(jpg|jpeg|png|otf|ttf|swf|svg|mp3|gif)$/,@project_dir,@excludes) do |path|
       @assets << path
     end
 
-    @declared = scan_dirs(/\.(css|as|mxml)$/, @project_dir, @declared_regex)
+    src_dec = scan_dirs(/\.(as|mxml|css)$/, @project_dir, /Embed\(source=['"]([\w._\-\/]+)['"]/)
+    css_dec = scan_dirs(/\.(css)$/, @project_dir, /:\s*url\(\s*['"](.*)['"]/)
+    mxml_dec = scan_dirs(/\.(mxml)$/, @project_dir, /@Embed\(['"]([\w._\-\/]+)['"]/)
 
+    @declared = src_dec + css_dec + mxml_dec
     @unused = []
 
     @assets.each { |ass| @unused << ass unless is_asset_used(ass) }
@@ -57,6 +58,7 @@ class UnusedAsset < Tool
   def describe
     desc = "#{generated_at} by as-asset-detector"
     desc << add_desc("Assets declared in src", @declared)
+    desc << add_desc("Assets found in project but not referenced in source", @unused)
     desc
   end
 

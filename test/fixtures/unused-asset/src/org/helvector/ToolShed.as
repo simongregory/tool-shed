@@ -21,9 +21,14 @@ public class ToolShed extends Object
     [Embed(source='/../assets/img/referenced.jpg')]
     private var jpgEg:Class;
 
-    [Embed(source='/../assets/img/referenced.png')]
-    private var pngEG:Class
+    [Embed(source="/../assets/img/referenced.png")]
+    private var pngEG:Class;
 
+    [Embed(source='/../assets/swf/referenced.swf')]
+    private var swfEG:Class;
+
+    [Embed(source='/../assets/audio/referenced.mp3')]
+    private var mp3Eg:Class;
 
 }
 

@@ -1,0 +1,7 @@
+
+@font-face {  		
+	src		  		: url("/../assets/fonts/referenced-in-unused-css.ttf");
+	fontFamily		: Phwack;
+	fontWeight		: Semibold;
+	unicode-range	: "Basic Latin";
+}

@@ -1,0 +1,12 @@
+
+@font-face {  		
+	src		  		: url("/../assets/fonts/referenced-in-css.ttf");
+	fontFamily		: Phwack;
+	fontWeight		: Semibold;
+	unicode-range	: "Basic Latin";
+}
+
+Thwacker
+{
+	thwackSkin : Embed(source="/../assets/swf/referenced-in-css.swf", symbol="ThwackerDisabledSkin");
+}
