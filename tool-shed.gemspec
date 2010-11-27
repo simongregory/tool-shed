@@ -29,7 +29,7 @@ EOF
   s.require_path              = ['lib']
   s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store|.tmproj|tmp|.gem/
   s.test_files                = Dir["test/*_test.rb"]
-  s.executables               = ['as-docp', 'as-manifest', 'as-class-detector', 'as-style-detector']
+  s.executables               = ['as-docp', 'as-manifest', 'as-class-detector', 'as-style-detector', 'as-asset-detector']
   s.post_install_message      = <<EOF
 Welcome to the Tool-Shed
 ========================

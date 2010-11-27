@@ -3,7 +3,7 @@
 #
 # Manages the command line interface for the unused style detection tool.
 #
-class UnusedStyleOpts < ToolOpts
+class UnusedStyleOpts < VacuumOpts
 
   def self.name
     "as-style-detector"

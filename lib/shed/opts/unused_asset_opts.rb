@@ -3,7 +3,7 @@
 #
 # Manages the command line interface for the unused assets detection tool.
 #
-class UnusedAssetOpts < VacuumOpts
+class UnusedAssetOpts < ToolOpts
 
   def self.name
     "as-asset-detector"

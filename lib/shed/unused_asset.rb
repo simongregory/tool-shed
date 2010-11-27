@@ -11,7 +11,7 @@ class UnusedAsset < Tool
   def initialize(opt,out=STDOUT)
     super(opt,out)
 
-    @project_dir = opt[:project_dir]
+    @project_dir = opt[:project_dir] || opt[:src] #remove src or refactor project_dir out
     @assets = []
     @src_files = []
     @declared = []
