@@ -29,7 +29,8 @@ EOF
   s.require_path              = ['lib']
   s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store|.tmproj|tmp|.gem/
   s.test_files                = Dir["test/*_test.rb"]
-  s.executables               = ['as-docp', 'as-manifest', 'as-class-vacuum', 'as-style-vacuum', 'as-asset-vacuum']
+  s.executables               = ['as-docp', 'as-manifest', 'as-class-vacuum',
+                                 'as-style-vacuum', 'as-asset-vacuum', 'as-mock']
   s.post_install_message      = <<EOF
 Welcome to the Tool-Shed
 ========================
