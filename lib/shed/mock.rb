@@ -44,7 +44,7 @@ class Mock < Tool
   def methods
     decs = ""
     @parser.methods.each_pair { |key, val|
-      args = val[:arguments]
+      args = val[:arguments].to_s
       rec = (args == '') ? '' : ', ' + args.gsub(/:\w+\b/,"")
 
       decs << make_method('',key,args,val[:return],rec)

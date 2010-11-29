@@ -58,7 +58,7 @@ class Interface
     doc.scan(regexp).each do |line|
       name = line[0]
       @methods[name] = { :name => name,
-                         :arguments => line[1],
+                         :arguments => line[1].split(','), #TODO, this will go wrong if there are default args with commas.
                          :return => line[4] }
     end
   end
