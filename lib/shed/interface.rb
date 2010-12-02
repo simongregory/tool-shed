@@ -53,14 +53,27 @@ class Interface
   end
 
   def load_methods(doc)
-    regexp = /^\s*function\s+\b([a-z]\w+)\b\s*\(([^)\n]*)(\)(\s*:\s*(\w+|\*))?)?/
+    regexp = /^\s*function\s+\b([a-z]\w+)\b\s*\((([^)\n]*)|(?m:[^)]+))\)\s*:\s*((\w+|\*))/
 
     doc.scan(regexp).each do |line|
-      name = line[0]
-      @methods[name] = { :name => name,
-                         :arguments => line[1].split(','), #TODO, this will go wrong if there are default args with commas.
-                         :return => line[4] }
+      add_method(line[0],line[1],line[3])
     end
+  end
+
+  def add_method(name,params,returns)
+    @methods[name] = { :name => name,
+                       :arguments => process_params(params),
+                       :return => returns }
+
+  end
+
+  def process_params(params)
+    arr = []
+    params.gsub!(/(\s|\n)/,'')
+    params.scan(/(\b\w+\b\s*:\s*\b\w+\b(=\s*(['"].*['"]|\w+))?|(\.\.\.\w+))/).each do |match|
+      arr << match[0]
+    end
+    arr
   end
 
   def accessor_regexp(type='get|set')

@@ -49,7 +49,25 @@ class TestInterface < Test::Unit::TestCase
       assert_equal('age', m[:name])
       assert_equal(['planted:Date', 'details:String="a,b,c"'], m[:arguments])
       assert_equal('Date', m[:return])
+
+      m = nil
+      m = @parser.get_method('plant')
+
+      assert_not_nil(m)
+      assert_equal('plant', m[:name])
+      assert_equal(['a:String', 'b:Boolean=false', 'c:Seed=pod'], m[:arguments])
+      assert_equal('Boolean', m[:return])
     end
+
+    should "identify methods with ...rest arguments" do
+      m = @parser.get_method('have')
+
+      assert_not_nil(m)
+      assert_equal('have', m[:name])
+      assert_equal(['a:String', '...rest'], m[:arguments])
+      assert_equal('Boolean', m[:return])
+    end
+
   end
 
   context "load an interface and tokenise the contents" do

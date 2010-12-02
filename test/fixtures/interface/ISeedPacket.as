@@ -30,7 +30,6 @@ public interface ISeedPacket
                      two:String,
                      three:Function):String;
 
-
      /**
       * Sets the seed variety.
       *
@@ -52,5 +51,11 @@ public interface ISeedPacket
                         ):void;
 
     */
+
+    function have(a:String, ...rest):Boolean;
+
+    function plant(a:String,
+                   b:Boolean=false,
+                   c:Seed=pod):Boolean;
 }
 }
