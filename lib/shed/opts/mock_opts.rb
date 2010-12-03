@@ -15,7 +15,6 @@ class MockOpts < ToolOpts
   end
 
   def self.add_optional(op,config)
-    superclass.add_optional(op,config)
     op.on("-i", "--interface FILE", String, "File path to ActionScript interface file.") do |value|
       config[:interface] = value
     end
