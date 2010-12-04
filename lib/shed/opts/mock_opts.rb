@@ -19,7 +19,7 @@ class MockOpts < ToolOpts
       config[:interface] = value
     end
 
-    op.on("-t", "--type STRING", String, "Mock library type.") do |value|
+    op.on("-t", "--type STRING", String, "Output type, use 'class' or 'mock4as'") do |value|
       config[:type] = value
     end
   end

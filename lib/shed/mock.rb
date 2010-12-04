@@ -11,6 +11,7 @@ class Mock < Tool
 
     do_exit unless valid_opts
 
+    create_mixer(opt[:type])
     generate(File.new(@interface).read)
   end
 
@@ -26,17 +27,26 @@ class Mock < Tool
 
   private
 
+  def create_mixer(type)
+    @mixer = ActionScriptClass.new
+    @mixer = Mock4AS.new if type == 'mock4as'
+    @mixer
+  end
+
   def head
-    i_face = @parser.name
     c_name = @parser.name.sub(/^I/,'')
-    "package\n{\n\nclass #{c_name}Mock extends Mock implements #{i_face}\n{\n\n"
+    i_face = @parser.name
+    @mixer.head(c_name,i_face)
   end
 
   def accessors
     decs = ""
     @parser.properties.each_pair { |key,prop|
-      decs << make_method('get ',prop[:name], '', 'void', '') if prop[:sets]
-      decs << make_method('set ',prop[:name], "value:#{prop[:type]}", prop[:type], '') if prop[:gets]
+      name, type = prop[:name], prop[:type]
+      sets, gets = prop[:sets], prop[:gets]
+
+      decs << @mixer.get(name,type) if gets
+      decs << @mixer.set(name,type) if sets
     }
     decs
   end
@@ -44,24 +54,14 @@ class Mock < Tool
   def methods
     decs = ""
     @parser.methods.each_pair { |key, val|
-      args = val[:arguments].to_s
-      rec = (args == '') ? '' : ', ' + args.gsub(/:\w+\b/,"")
-
-      decs << make_method('',key,args,val[:return],rec)
+      args = val[:arguments]
+      decs << @mixer.method('',key,args,val[:return])
     }
     decs
   end
 
-  def make_method(type,name,args,ret,rec)
-    template =  "    public function #{type}#{name}(#{args}):#{ret}\n"
-    template << "    {\n"
-    template << "        record('#{name}'#{rec});\n"
-    template << "        return expectedReturnFor('#{name}') as #{ret};\n" unless ret == 'void'
-    template << "    }\n\n"
-  end
-
   def foot
-    "\n}\n}\n"
+    @mixer.foot
   end
 
   def do_exit
