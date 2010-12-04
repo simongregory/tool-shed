@@ -71,8 +71,8 @@ standard out.
 Example use:
 
     as-concrete -i IShed
-    as-concrete -i IShed -t 'mock4as'
-    as-concrete -i IShed -t 'class'
+    as-concrete -i IShed -t mock4as
+    as-concrete -i IShed -t class
 
 ## Install
 
