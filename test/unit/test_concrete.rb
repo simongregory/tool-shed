@@ -2,56 +2,56 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class MockTest < Test::Unit::TestCase
+class ConcreteTest < Test::Unit::TestCase
 
   def fix
     File.expand_path(File.dirname(__FILE__)+ "/../fixtures/interface")
   end
 
-  context "A mock generator tool running with a missing interface file" do
+  context "A concrete generator tool running with a missing interface file" do
 
     should "exit with an error message" do
 
-      opts = MockOpts.parse ['-i', "#{fix}/IDoNotExist.as"]
+      opts = ConcreteOpts.parse ['-i', "#{fix}/IDoNotExist.as"]
       out = StringIO.new
 
       begin
-        Mock.new(opts,out)
+        Concrete.new(opts,out)
         flunk
       rescue SystemExit => e
         assert_equal 0, e.status
-        assert_match(/#{Mock::INVALID_OPTS}/, out.string)
+        assert_match(/#{Concrete::INVALID_OPTS}/, out.string)
       end
 
     end
   end
 
-  context "A mock generator tool given an invalid interface file" do
+  context "A concrete generator tool given an invalid interface file" do
 
     should "exit with an error message" do
 
-      opts = MockOpts.parse ['-i', "#{fix}/Shed.as"]
+      opts = ConcreteOpts.parse ['-i', "#{fix}/Shed.as"]
       out = StringIO.new
 
       begin
-        Mock.new(opts,out)
+        Concrete.new(opts,out)
         flunk
       rescue SystemExit => e
         assert_equal 0, e.status
-        assert_match(/#{Mock::INVALID_OPTS}/, out.string)
+        assert_match(/#{Concrete::INVALID_OPTS}/, out.string)
       end
 
     end
   end
 
-  context "A mock generator tool" do
+  context "A concrete generator tool" do
 
     context "outputting actionscript classes" do
 
       setup do
-        opts = MockOpts.parse ['-i', "#{fix}/IShed.as"]
+        opts = ConcreteOpts.parse ['-i', "#{fix}/IShed.as"]
         @out = StringIO.new
-        @mock = Mock.new(opts,@out)
+        @concrete = Concrete.new(opts,@out)
       end
 
       should "output a string" do
@@ -98,16 +98,16 @@ class MockTest < Test::Unit::TestCase
       end
 
       should "have valid options" do
-        assert @mock.valid_opts
+        assert @concrete.valid_opts
       end
     end
 
     context "outputting mock 4 as classes" do
 
       setup do
-        opts = MockOpts.parse ['-i', "#{fix}/IShed.as", '-t', 'mock4as']
+        opts = ConcreteOpts.parse ['-i', "#{fix}/IShed.as", '-t', 'mock4as']
         @out = StringIO.new
-        @mock = Mock.new(opts,@out)
+        @concrete = Concrete.new(opts,@out)
       end
 
       should "output a string" do
@@ -168,7 +168,7 @@ class MockTest < Test::Unit::TestCase
       end
 
       should "have valid options" do
-        assert @mock.valid_opts
+        assert @concrete.valid_opts
       end
     end
 

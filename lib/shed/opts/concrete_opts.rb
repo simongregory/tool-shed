@@ -4,14 +4,14 @@
 # Manages the command line interface for the ActionScript 3 Mock Framework Class
 # generation tool.
 #
-class MockOpts < ToolOpts
+class ConcreteOpts < ToolOpts
 
   def self.name
-    "as-mock"
+    "as-concrete"
   end
 
   def self.description
-    "ActionScript Mock Class Generator"
+    "ActionScript Concrete Class Generator"
   end
 
   def self.add_optional(op,config)

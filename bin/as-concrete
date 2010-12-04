@@ -6,8 +6,8 @@ require 'tool_shed'
 
 begin
 
-  opt = MockOpts.parse(ARGV)
-  Mock.new(opt)
+  opt = ConcreteOpts.parse(ARGV)
+  Concrete.new(opt)
 
 rescue OptionParser::ParseError => e
 

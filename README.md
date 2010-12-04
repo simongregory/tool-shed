@@ -62,6 +62,17 @@ Example use:
     
     as-asset-vacuum
     as-asset-vacuum -s source/main -o report/vacuum/asset.xml
+    
+### as-concrete
+
+Takes an Interface and generates a concrete class from it. Output is directed to
+standard out.
+
+Example use:
+
+    as-concrete -i IShed
+    as-concrete -i IShed -t 'mock4as'
+    as-concrete -i IShed -t 'class'
 
 ## Install
 

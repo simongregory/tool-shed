@@ -1,9 +1,9 @@
 # encoding: utf-8
 
 #
-# Takes an ActionScript 3 Interface file and generates a Mock class from it.
+# Takes an ActionScript 3 Interface file and generates a Concrete class from it.
 #
-class Mock < Tool
+class Concrete < Tool
   def initialize(opt,out=STDOUT)
     super(opt,out)
 

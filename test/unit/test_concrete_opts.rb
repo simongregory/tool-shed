@@ -2,49 +2,49 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class MockOptTest < Test::Unit::TestCase
+class ConcreteOptTest < Test::Unit::TestCase
 
-  context "A Mock Tool Options Parser" do
+  context "A Concrete Tool Options Parser" do
 
     should "return default hash if no arguments are specified" do
       args = []
-      opts = MockOpts.parse(args)
+      opts = ConcreteOpts.parse(args)
 
       assert_equal false, opts[:verbose]
     end
 
     should "display a name" do
-      assert_match(/\w+/, MockOpts.name)
+      assert_match(/\w+/, ConcreteOpts.name)
     end
 
     should "describe itself" do
-      assert_match(/\w+/, MockOpts.description)
+      assert_match(/\w+/, ConcreteOpts.description)
     end
 
     should "define a type when -t is set" do
       arg = 'olate'
-      opts = MockOpts.parse ['-t', arg]
+      opts = ConcreteOpts.parse ['-t', arg]
 
       assert_equal arg, opts[:type]
     end
 
     should "define a type when --type is set" do
       arg = '4as'
-      opts = MockOpts.parse ['--type', arg]
+      opts = ConcreteOpts.parse ['--type', arg]
 
       assert_equal arg, opts[:type]
     end
 
     should "define a interface when -i is set" do
       arg = 'org.helvector.IShed'
-      opts = MockOpts.parse ['-i', arg]
+      opts = ConcreteOpts.parse ['-i', arg]
 
       assert_equal arg, opts[:interface]
     end
 
     should "define a interface when --interface is set" do
       arg = 'org.helvector.IShed'
-      opts = MockOpts.parse ['--interface', arg]
+      opts = ConcreteOpts.parse ['--interface', arg]
 
       assert_equal arg, opts[:interface]
     end

@@ -12,7 +12,7 @@ package org.shed.bench.box
 {
 
 /**
- * A trickier fixture to test the <code>as-mock</code> tool against.
+ * A trickier fixture to test the <code>as-concrete</code> tool against.
  *
  * @langversion ActionScript 3
  * @playerversion Flash 9.0.0
