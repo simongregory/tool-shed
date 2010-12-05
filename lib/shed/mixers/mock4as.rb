@@ -5,10 +5,10 @@
 #
 class Mock4AS < ActionScriptClass
   def head(name,interface)
-    "package\n{\n\nclass #{name}Mock extends Mock implements #{interface}\n{\n\n"
+    "package\n{\n\nclass #{name}Mock extends Mock implements #{interface}\n{\n\nimport org.mock4as.Mock;\n\n"
   end
 
-  def method(type,name,arguments,returns)
+  def method(name,arguments,returns,type='')
     params = parameterize(arguments)
     record = (params == '') ? '' : ', ' + params.gsub(/:\w+\b/,"")
 

@@ -10,18 +10,19 @@ class ActionScriptClass
   end
 
   def get(name,type)
-    method('get ', name, [''], type)
+    method(name, '', type,'get ')
   end
 
   def set(name,type)
-    method('set ',name, ["value:#{type}"], 'void')
+    method(name, "value:#{type}", 'void','set ')
   end
 
   def parameterize(arguments)
-    arguments.join(', ')
+    arguments = arguments.join(', ') if arguments.is_a? Array
+    arguments
   end
 
-  def method(type,name,arguments,returns)
+  def method(name,arguments,returns,type='')
     template =  "    public function #{type}#{name}(#{parameterize(arguments)}):#{returns}\n"
     template << "    {\n"
     template << "        return;\n" unless returns == 'void'

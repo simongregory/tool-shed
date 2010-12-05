@@ -21,15 +21,21 @@ class Concrete < Tool
 
   def generate(file)
     @parser = Interface.new(file) rescue do_exit
-
-    puts head + accessors + methods + foot
+    output
   end
 
   private
 
+  def output
+    puts head + accessors + methods + foot
+  end
+
   def create_mixer(type)
-    @mixer = ActionScriptClass.new
-    @mixer = Mock4AS.new if type == 'mock4as'
+    mixers = { 'imp' => JustImplement,
+               'class' => ActionScriptClass,
+               'mock4as' => Mock4AS }
+
+    @mixer = mixers[type].new
     @mixer
   end
 
@@ -41,21 +47,19 @@ class Concrete < Tool
 
   def accessors
     decs = ""
-    @parser.properties.each_pair { |key,prop|
-      name, type = prop[:name], prop[:type]
-      sets, gets = prop[:sets], prop[:gets]
+    @parser.properties.each_pair { |name,property|
+      type = property[:type]
 
-      decs << @mixer.get(name,type) if gets
-      decs << @mixer.set(name,type) if sets
+      decs << @mixer.get(name,type) if property[:gets]
+      decs << @mixer.set(name,type) if property[:sets]
     }
     decs
   end
 
   def methods
     decs = ""
-    @parser.methods.each_pair { |key, val|
-      args = val[:arguments]
-      decs << @mixer.method('',key,args,val[:return])
+    @parser.methods.each_pair { |name,method|
+      decs << @mixer.method(name, method[:arguments], method[:return])
     }
     decs
   end

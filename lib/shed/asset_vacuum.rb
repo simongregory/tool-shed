@@ -36,15 +36,12 @@ class AssetVacuum < Tool
   def detect
     puts "Scanning project for assets that are unused..."
 
-    Search.find_all(/\.(jpg|jpeg|png|otf|ttf|swf|svg|mp3|gif)$/,@src,@excludes) do |path|
-      @assets << path
-    end
+    scan_for_assets
 
-    src_dec = scan_dirs(/\.(as|mxml|css)$/, @src, /Embed\(source=['"]([\w._\-\/]+)['"]/)
-    css_dec = scan_dirs(/\.(css)$/, @src, /:\s*url\(\s*['"](.*)['"]/)
-    mxml_dec = scan_dirs(/\.(mxml)$/, @src, /@Embed\(['"]([\w._\-\/]+)['"]/)
+    @declared = scan_dirs(/\.(as|mxml|css)$/, @src, /Embed\(source=['"]([\w._\-\/]+)['"]/)
+    @declared += scan_dirs(/\.(css)$/, @src, /:\s*url\(\s*['"](.*)['"]/)
+    @declared += scan_dirs(/\.(mxml)$/, @src, /@Embed\(['"]([\w._\-\/]+)['"]/)
 
-    @declared = src_dec + css_dec + mxml_dec
     @unused = []
 
     @assets.each { |ass| @unused << ass unless is_asset_used(ass) }
@@ -53,6 +50,15 @@ class AssetVacuum < Tool
   end
 
   private
+
+  #
+  # Finds all assets in the source directory.
+  #
+  def scan_for_assets
+    Search.find_all(/\.(jpg|jpeg|png|otf|ttf|swf|svg|mp3|gif)$/,@src,@excludes) do |path|
+      @assets << path
+    end
+  end
 
   #
   # Summarise the collected data.

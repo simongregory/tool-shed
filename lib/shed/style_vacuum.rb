@@ -22,15 +22,15 @@ class StyleVacuum < Tool
 
     @css_dir = opt[:css_dir]
 
-    @style_regex = /styleName\s*=\s*["']\s*\{?\s*([\w.]+)\s*\}?\s*["']/
-    @declared_regex = /^\.(\w+)/
-
-    @declared, @used, @unused, @undeclared = [], [], [], []
-
     unless valid_opts
       @out.puts "#{INVALID_OPTS} The specified css directory does not exist, or does not contain css files."
       return
     end
+
+    @style_regex = /styleName\s*=\s*["']\s*\{?\s*([\w.]+)\s*\}?\s*["']/
+    @declared_regex = /^\.(\w+)/
+
+    @declared, @used, @unused, @undeclared = [], [], [], []
 
     detect
 
@@ -71,10 +71,8 @@ class StyleVacuum < Tool
   # Summarise the collected data.
   #
   def summarise
-    puts "Declared styles: #{@declared.length.to_s}"
-    puts "Undeclared styles: #{@undeclared.length.to_s}"
-    puts "Used styles: #{@used.length.to_s}"
-    puts "Unused styles: #{@unused.length.to_s}"
+    puts sprintf( "Declared styles: %d\nUndeclared styles: %d\nUsed styles: %d\nUnused styles: %d\n",
+      @declared.length, @undeclared.length, @used.length, @unused.length)
   end
 
   #

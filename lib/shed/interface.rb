@@ -8,14 +8,13 @@ class Interface
   attr_reader :name, :properties, :methods, :package
 
   def initialize(string)
-    @raw = string
-    @uncommented = Stripper.ecma_comments(string)
+    @doc = Stripper.ecma_comments(string)
 
     @properties, @methods = {}, {}
     @package, @name = '', ''
 
-    raise "Document is not an interface" unless is_valid(@uncommented)
-    parse(@uncommented)
+    raise "Document is not an interface" unless is_valid
+    parse
   end
 
   def get_method(name)
@@ -28,34 +27,34 @@ class Interface
 
   private
 
-  def is_valid(doc)
-    doc.scan(/^\s*public\s+(interface)\s+(\w+)\b/)
+  def is_valid
+    @doc.scan(/^\s*public\s+(interface)\s+(\w+)\b/)
     return true if $1 == "interface"
     return false
   end
 
-  def parse(doc)
-    load_name(doc)
-    load_package(doc)
-    load_methods(doc)
-    load_getters(doc)
-    load_setters(doc)
+  def parse
+    load_name
+    load_package
+    load_methods
+    load_getters
+    load_setters
   end
 
-  def load_name(doc)
+  def load_name
     regexp = /^(\s+)?public\s+interface\s+(\w+)\b/
-    doc.scan(regexp).each { |line| @name = line[1] }
+    @doc.scan(regexp).each { |line| @name = line[1] }
   end
 
-  def load_package(doc)
+  def load_package
     regexp = /^(\s+)?package\s+([A-Za-z0-9.]+)/
-    doc.scan(regexp).each { |line| @package = line[1] }
+    @doc.scan(regexp).each { |line| @package = line[1] }
   end
 
-  def load_methods(doc)
+  def load_methods
     regexp = /^\s*function\s+\b([a-z]\w+)\b\s*\((([^)\n]*)|(?m:[^)]+))\)\s*:\s*((\w+|\*))/
 
-    doc.scan(regexp).each do |line|
+    @doc.scan(regexp).each do |line|
       add_method(line[0],line[1],line[3])
     end
   end
@@ -80,20 +79,20 @@ class Interface
     /^\s*function\s+\b(#{type})\b\s+\b(\w+)\b\s*\(([^)\n]*)(\)(\s*:\s*(\w+|\*))?)?/
   end
 
-  def load_getters(doc)
+  def load_getters
     regexp = accessor_regexp('get')
 
-    doc.scan(regexp).each do |line|
+    @doc.scan(regexp).each do |line|
       prop = create_prop(line[1])
       prop[:type] = line[5]
       prop[:gets] = true;
     end
   end
 
-  def load_setters(doc)
+  def load_setters
     regexp = accessor_regexp('set')
 
-    doc.scan(regexp).each do |line|
+    @doc.scan(regexp).each do |line|
       prop = create_prop(line[1])
       prop[:type] = line[2].split(':')[1]
       prop[:sets] = true;

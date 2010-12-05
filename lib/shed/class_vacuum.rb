@@ -20,6 +20,7 @@ class ClassVacuum < Tool
     @manifest = opt[:manifest]
     @link_regex = /<script name=".*\/(\w+)\.(as|mxml)/
     @manifest_regex = /<component id="(\w+)"/
+    @empty_packages = []
 
     unless valid_opts
       @out.puts "#{INVALID_OPTS} The link report, manifest file, or source directory does not exist."
@@ -44,7 +45,7 @@ class ClassVacuum < Tool
     @link_classes = linked(@link_report, @link_regex, 'link-report')
 
     @unused_classes = @manifest_classes-@link_classes
-    @empty_packages = empties(@src)
+    find_empties(@src)
 
     summarise
   end
@@ -62,10 +63,8 @@ class ClassVacuum < Tool
   #
   # Scans the path for empty directories and lists them.
   #
-  def empties(path)
-    empties = []
-    Search.for_empties(path) { |path| empties << path.sub( /^.*src\//, "") }
-    empties
+  def find_empties(path)
+    Search.for_empties(path) { |path| @empty_packages << path.sub( /^.*src\//, "") }
   end
 
   #

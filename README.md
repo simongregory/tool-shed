@@ -1,22 +1,16 @@
 # Tool Shed
 
 A collection of utility scripts to help working with ActionScript and Flex 
-projects. These scripts are under development, so **don't** expect reliability.
+projects. They are under development, so **don't** expect too much reliability.
 
-All tools have help available on the command line, to view use:
-
-    as-tool-name -h
+All tools have help available on the command line, to view use: `as-tool-name -h`
 
 ### as-docp
 
 The `as-docp` tool can be used to generate a `flex-config.xml` file from package
 level ASDoc files. This can then be used by the `asdoc` tool when generating
-ASDocs for your project.
-
-To document a package create a single file with a `.asdoc` suffix to contain
-your ASDoc comments.
-
-Example use:
+ASDocs for your project. To document a package create a single file with a 
+`.asdoc` suffix to contain your ASDoc comments.
 
     as-docp -s src -o tmp/asdocp-config.xml
 
@@ -24,8 +18,6 @@ Example use:
 
 Scans a specified source tree for ActionScript and MXML files and for each one
 found creates a manifest entry. When complete writes the results to disk.
-
-Example use:
 
     as-manifest
     as-manifest -s source/main -o project-manifest.xml
@@ -37,18 +29,15 @@ Compares a `mxmlc` generated `link-report.xml` against a `manifest.xml` file to
 identify files that are in a project source tree but are no longer compiled
 into the application.
 
-Example use:
-
     as-class-vacuum -s src/main -o report/vacuum/class.xml -l report/link/app-link-report.xml -m manifest.xml
 
-To generate a link report via mxmlc use `mxmlc -link-report=report.xml`
+To generate a link report via mxmlc use `-link-report=report.xml` in the compiler
+arguments.
 
 ### as-style-vacuum
 
 Loads all styles defined in **css** files (mxml isn't included) and identifies
 styles that are not referenced in the source tree.
-
-Example use:
 
     as-style-vacuum -c source/assets -s source/main -o report/vacuum/style.xml
 
@@ -58,21 +47,20 @@ This script scans a source tree for assets of types `jpg, jpeg, png, otf, ttf,
 swf, svg, mp3, gif` then searches all ActionScript, CSS and MXML files to 
 identify which assets are not referenced in the source files.
 
-Example use:
-    
     as-asset-vacuum
     as-asset-vacuum -s source/main -o report/vacuum/asset.xml
     
 ### as-concrete
 
 Takes an Interface and generates a concrete class from it. Output is directed to
-standard out.
+standard out. Using the `--type` argument will change the format, by default an
+ActionScript class is generated, using `-t imp` only outputs the accessor and 
+method implementations, and `-t mock4as` will generate a Mock4AS class.
 
-Example use:
-
-    as-concrete -i IShed
-    as-concrete -i IShed -t mock4as
-    as-concrete -i IShed -t class
+    as-concrete -i IShed.as
+    as-concrete -i IShed.as -t mock4as
+    as-concrete -i IShed.as -t class
+    as-concrete -i IShed.as -t imp
 
 ## Install
 
