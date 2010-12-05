@@ -109,7 +109,9 @@ class ToolOpts
 
     add_tail(options,out)
 
-    options.parse!(args)
+    args = options.parse!(args)
+
+    config[:default] = args.shift
 
     config
   end

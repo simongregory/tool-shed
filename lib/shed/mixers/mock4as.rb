@@ -8,14 +8,16 @@ class Mock4AS < ActionScriptClass
     "package\n{\n\nclass #{name}Mock extends Mock implements #{interface}\n{\n\nimport org.mock4as.Mock;\n\n"
   end
 
-  def method(name,arguments,returns,type='')
+  protected
+
+  def template(name,arguments,returns,type='')
     params = parameterize(arguments)
     record = (params == '') ? '' : ', ' + params.gsub(/:\w+\b/,"")
 
-    template =  "    public function #{type}#{name}(#{params}):#{returns}\n"
-    template << "    {\n"
-    template << "        record('#{name}'#{record});\n"
-    template << "        return expectedReturnFor('#{name}') as #{returns};\n" unless returns == 'void'
-    template << "    }\n\n"
+    str =  "    public function #{type}#{name}(#{params}):#{returns}\n"
+    str << "    {\n"
+    str << "        record('#{name}'#{record});\n"
+    str << "        return expectedReturnFor('#{name}') as #{returns};\n" unless returns == 'void'
+    str << "    }\n\n"
   end
 end

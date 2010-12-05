@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ProjectToolsTest < Test::Unit::TestCase
+class TestSourceTools < Test::Unit::TestCase
 
   context "Utility source tools" do
 

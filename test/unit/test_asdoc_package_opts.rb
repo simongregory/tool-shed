@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ASDocPackageOptsTest < Test::Unit::TestCase
+class TestASDocPackageOpts < Test::Unit::TestCase
 
   context "A AsDoc Package Tool Options Parser" do
 

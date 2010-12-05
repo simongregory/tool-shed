@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ASDocPackageTest < Test::Unit::TestCase
+class TestASDocPackage < Test::Unit::TestCase
 
   context "An ASDdoc Package Tool" do
 
@@ -36,13 +36,16 @@ class ASDocPackageTest < Test::Unit::TestCase
   end
 
   context "A ASDocPackage tool should skip specified directories" do
+
     setup do
       src  = File.expand_path(File.dirname(__FILE__)+ "/../fixtures/src")
-      opts = { :verbose => true,
-               :src => src,
-               :output => '/tmp/asdoc-package-tool-test-output.xml',
-               :excludes => ['one'],
-               :silent => true }
+      opts = {
+        :verbose => true,
+        :src => src,
+        :output => '/tmp/asdoc-package-tool-test-output.xml',
+        :excludes => ['one'],
+        :silent => true
+      }
 
       @pack = ASDocPackage.new(opts)
     end
@@ -53,9 +56,11 @@ class ASDocPackageTest < Test::Unit::TestCase
       p = @pack.xml =~ /Package One/ ? true : false
       assert_equal(false,p)
     end
+
   end
 
   context "A asdoc package builder tool invoked on a empty directory" do
+
     setup do
       @output = '/tmp/as-manifest-tool-test.xml'
       src  = File.expand_path(File.dirname(__FILE__)+ "/../fixtures/empty")
@@ -67,6 +72,7 @@ class ASDocPackageTest < Test::Unit::TestCase
     should "not find any files" do
       assert_match(/No.*files found\./, @out.string)
     end
+
   end
 
 end

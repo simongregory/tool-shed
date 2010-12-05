@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ToolTest < Test::Unit::TestCase
+class TestTool < Test::Unit::TestCase
 
   context "A default tool-shed" do
 
@@ -52,6 +52,7 @@ class ToolTest < Test::Unit::TestCase
   end
 
   context "A verbose tool-shed" do
+
     setup do
       @out = StringIO.new
       @tool = Tool.new({:verbose => true, :output => '/tmp/tool-shed.txt'}, @out)

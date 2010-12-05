@@ -7,14 +7,12 @@ class TestAssetVacuumOpts < Test::Unit::TestCase
   context "An Asset Vacuum Tool Options Parser" do
 
     should "return default hash if no arguments are specified" do
-
       args = []
       opts = AssetVacuumOpts.parse(args)
 
       assert_equal 'assets.txt', opts[:output]
       assert_equal '.', opts[:src]
       assert_equal false, opts[:verbose]
-
     end
 
     should "display a name" do
@@ -26,5 +24,4 @@ class TestAssetVacuumOpts < Test::Unit::TestCase
     end
 
   end
-
 end

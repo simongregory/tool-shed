@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ManifestTest < Test::Unit::TestCase
+class TestManifest < Test::Unit::TestCase
 
   context "A manifest builder tool" do
 

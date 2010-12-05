@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class SearchTest < Test::Unit::TestCase
+class TestSearch < Test::Unit::TestCase
 
   context "A file search utility" do
 

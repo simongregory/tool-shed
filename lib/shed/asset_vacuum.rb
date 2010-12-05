@@ -6,18 +6,17 @@
 # no longer used by the application.
 #
 class AssetVacuum < Tool
-  attr_reader :assets, :declared, :unused
+  attr_reader :assets,
+              :declared,
+              :unused
 
   def initialize(opt,out=STDOUT)
     super(opt,out)
 
     @src = opt[:src]
-    @assets, @src_files, @declared = [], [], []
+    @assets, @src_files, @declared, @unused = [], [], [], []
 
-    unless valid_opts
-      @out.puts "#{INVALID_OPTS} The source directory does not exist."
-      return
-    end
+    do_exit unless valid_opts
 
     detect
 
@@ -27,22 +26,21 @@ class AssetVacuum < Tool
   end
 
   #
-  # Valid if the specified project directory exists.
+  # Validates the given opts. Returns a boolean indicating if the src directory
+  # specified can be used.
   #
   def valid_opts
     File.exist?(@src) rescue false
   end
 
+  #
+  # Scans the project and detects usage statitics for the assets it's finds.
+  #
   def detect
     puts "Scanning project for assets that are unused..."
 
     scan_for_assets
-
-    @declared = scan_dirs(/\.(as|mxml|css)$/, @src, /Embed\(source=['"]([\w._\-\/]+)['"]/)
-    @declared += scan_dirs(/\.(css)$/, @src, /:\s*url\(\s*['"](.*)['"]/)
-    @declared += scan_dirs(/\.(mxml)$/, @src, /@Embed\(['"]([\w._\-\/]+)['"]/)
-
-    @unused = []
+    scan_for_declared
 
     @assets.each { |ass| @unused << ass unless is_asset_used(ass) }
 
@@ -61,11 +59,20 @@ class AssetVacuum < Tool
   end
 
   #
-  # Summarise the collected data.
+  # Finds all asset declarations in the source files.
+  #
+  def scan_for_declared
+    @declared = scan_dirs(/\.(as|mxml|css)$/, @src, /Embed\(source=['"]([\w._\-\/]+)['"]/)
+    @declared += scan_dirs(/\.(css)$/, @src, /:\s*url\(\s*['"](.*)['"]/)
+    @declared += scan_dirs(/\.(mxml)$/, @src, /@Embed\(['"]([\w._\-\/]+)['"]/)
+  end
+
+  #
+  # Summarise the collected data and outputs a string detailing how many assets
+  # are used/unused in the project.
   #
   def summarise
-    puts "Used assets: #{@declared.length.to_s}"
-    puts "Unused assets: #{@unused.length.to_s}"
+    puts sprintf("Used assets: %d\nUnused assets: %d", @declared.length, @unused.length)
   end
 
   #
@@ -78,6 +85,10 @@ class AssetVacuum < Tool
     desc
   end
 
+  #
+  # Returns a boolean to indicate if the asset is referenced within the
+  # application.
+  #
   def is_asset_used(file)
     used = false
     @declared.each { |declaration|
@@ -88,4 +99,10 @@ class AssetVacuum < Tool
     used
   end
 
+  #
+  # Log an error message to disk and raise exit.
+  #
+  def do_exit
+    super "The source directory does not exist."
+  end
 end

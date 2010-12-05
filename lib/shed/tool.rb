@@ -107,4 +107,12 @@ class Tool
     declarations.flatten!.sort!.uniq! unless declarations.empty?
     declarations
   end
+
+  #
+  # Log an error message and raise exit.
+  #
+  def do_exit(msg='')
+    @out.puts "#{INVALID_OPTS} #{msg}"
+    exit
+  end
 end

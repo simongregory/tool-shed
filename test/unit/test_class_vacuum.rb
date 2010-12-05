@@ -34,15 +34,20 @@ class TestClassVacuum < Test::Unit::TestCase
     end
 
     context "with incorrect arguments" do
-      setup do
-        opt = {:manifest => "INVALID", :output => '/tmp/as-class-vacuum.txt'}
-        @out = StringIO.new
-        @tool = ClassVacuum.new(opt,@out)
-      end
 
       should "fail with a warning message" do
-        assert_match(/#{ClassVacuum::INVALID_OPTS}/, @out.string)
+        opt = {:manifest => "INVALID", :output => '/tmp/as-class-vacuum.txt'}
+        out = StringIO.new
+
+        begin
+          ClassVacuum.new(opt,out)
+          flunk
+        rescue SystemExit => e
+          assert_equal 0, e.status
+          assert_match(/#{Tool::INVALID_OPTS}/, out.string)
+        end
       end
+
     end
 
   end

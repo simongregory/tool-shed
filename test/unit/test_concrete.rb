@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ConcreteTest < Test::Unit::TestCase
+class TestConcrete < Test::Unit::TestCase
 
   def fix
     File.expand_path(File.dirname(__FILE__)+ "/../fixtures/interface")
@@ -20,10 +20,11 @@ class ConcreteTest < Test::Unit::TestCase
         flunk
       rescue SystemExit => e
         assert_equal 0, e.status
-        assert_match(/#{Concrete::INVALID_OPTS}/, out.string)
+        assert_match(/#{Tool::INVALID_OPTS}/, out.string)
       end
 
     end
+
   end
 
   context "A concrete generator tool given an invalid interface file" do
@@ -38,10 +39,11 @@ class ConcreteTest < Test::Unit::TestCase
         flunk
       rescue SystemExit => e
         assert_equal 0, e.status
-        assert_match(/#{Concrete::INVALID_OPTS}/, out.string)
+        assert_match(/#{Tool::INVALID_OPTS} The specified/, out.string)
       end
 
     end
+
   end
 
   context "A concrete generator tool" do
@@ -228,6 +230,7 @@ class ConcreteTest < Test::Unit::TestCase
         assert @concrete.valid_opts
       end
     end
+
   end
 
 end

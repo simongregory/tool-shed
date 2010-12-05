@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ToolOptsTest < Test::Unit::TestCase
+class TestToolOpts < Test::Unit::TestCase
 
   context "A  Tool Options Parser" do
 
@@ -17,13 +17,26 @@ class ToolOptsTest < Test::Unit::TestCase
 
     end
 
-    should "define verbose mode when -v is set" do
+    should "recognise default arguments if no switches are present" do
+      args = ['path/to/a/text.file']
+      opts = ToolOpts.parse(args)
 
+      assert_equal 'path/to/a/text.file', opts[:default]
+    end
+
+    should "recognise default arguments when switches are present" do
+      args = ['-v','path/to/a/text.file', '-s', 'path/to/source']
+      opts = ToolOpts.parse(args)
+
+      assert_equal 'path/to/a/text.file', opts[:default]
+      assert opts[:verbose]
+    end
+
+    should "define verbose mode when -v is set" do
       args = ['-v']
       opts = ToolOpts.parse(args)
 
       assert opts[:verbose]
-
     end
 
     should "set source when -s or --source is specified" do

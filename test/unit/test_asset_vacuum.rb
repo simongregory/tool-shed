@@ -59,19 +59,25 @@ class TestAssetVacuum < Test::Unit::TestCase
       should "only search css files referenced in as/mxml for asset references" do
         #Tecnically yes. Sounds like a pain in the ass to me though.
       end
+
     end
 
     context "with incorrect arguments" do
-      setup do
-        opt = {:src => "INVALID", :output => "/tmp/as-asset-vacuum.txt"}
-        @out = StringIO.new
-        @tool = AssetVacuum.new(opt,@out)
-      end
 
       should "fail with a warning message" do
-        assert_match(/#{AssetVacuum::INVALID_OPTS}/, @out.string)
-      end
-    end
-  end
+        opt = {:src => "INVALID", :output => "/tmp/as-asset-vacuum.txt"}
+        out = StringIO.new
 
+        begin
+          AssetVacuum.new(opt,out)
+          flunk
+        rescue SystemExit => e
+          assert_equal 0, e.status
+          assert_match(/#{Tool::INVALID_OPTS} The source/, out.string)
+        end
+      end
+
+    end
+
+  end
 end

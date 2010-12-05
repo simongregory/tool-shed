@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 #
-# Takes an ActionScript 3 Interface file and generates a Concrete class from it.
+# Takes an ActionScript 3 Interface file and generates a concrete implementation
+# from it.
 #
 class Concrete < Tool
   def initialize(opt,out=STDOUT)
@@ -15,10 +16,16 @@ class Concrete < Tool
     generate(File.new(@interface).read)
   end
 
+  #
+  # Valid if an Interface has been supplied in the options.
+  #
   def valid_opts
     File.exist?(@interface) rescue false
   end
 
+  #
+  # Parse the Interface and outputs the concrete document.
+  #
   def generate(file)
     @parser = Interface.new(file) rescue do_exit
     output
@@ -26,10 +33,16 @@ class Concrete < Tool
 
   private
 
+  #
+  # Output the constructed document.
+  #
   def output
     puts head + accessors + methods + foot
   end
 
+  #
+  # Create the mixing tool which determines the output format.
+  #
   def create_mixer(type)
     mixers = { 'imp' => JustImplement,
                'class' => ActionScriptClass,
@@ -39,12 +52,16 @@ class Concrete < Tool
     @mixer
   end
 
+  #
+  # Generate the file header.
+  #
   def head
-    c_name = @parser.name.sub(/^I/,'')
-    i_face = @parser.name
-    @mixer.head(c_name,i_face)
+    @mixer.head(@parser.class_name,@parser.name)
   end
 
+  #
+  # Generate the accessor block.
+  #
   def accessors
     decs = ""
     @parser.properties.each_pair { |name,property|
@@ -56,6 +73,9 @@ class Concrete < Tool
     decs
   end
 
+  #
+  # Generate the method block.
+  #
   def methods
     decs = ""
     @parser.methods.each_pair { |name,method|
@@ -64,12 +84,17 @@ class Concrete < Tool
     decs
   end
 
+  #
+  # Generate the file footer.
+  #
   def foot
     @mixer.foot
   end
 
+  #
+  # Log an error message and raise exit.
+  #
   def do_exit
-    @out.puts "#{INVALID_OPTS} The specified interface file does not exist, or is not an Interface."
-    exit
+    super "The specified interface file does not exist, or is not an Interface."
   end
 end

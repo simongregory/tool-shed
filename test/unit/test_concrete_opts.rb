@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ConcreteOptTest < Test::Unit::TestCase
+class TestConcreteOpt < Test::Unit::TestCase
 
   context "A Concrete Tool Options Parser" do
 

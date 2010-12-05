@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class ManifestOptTest < Test::Unit::TestCase
+class TestManifestOpt < Test::Unit::TestCase
 
   context "A Manifest Tool Options Parser" do
 
@@ -13,7 +13,6 @@ class ManifestOptTest < Test::Unit::TestCase
       assert_equal 'manifest.xml', opts[:output]
       assert_equal '.', opts[:src]
       assert_equal false, opts[:verbose]
-
     end
 
     should "display a name" do

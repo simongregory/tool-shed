@@ -2,7 +2,7 @@
 
 require File.join(File.dirname(__FILE__), "/../test_helper")
 
-class StripperTest < Test::Unit::TestCase
+class TestStripper < Test::Unit::TestCase
 
   context "Comment stripper" do
 

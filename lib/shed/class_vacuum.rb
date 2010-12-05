@@ -22,10 +22,7 @@ class ClassVacuum < Tool
     @manifest_regex = /<component id="(\w+)"/
     @empty_packages = []
 
-    unless valid_opts
-      @out.puts "#{INVALID_OPTS} The link report, manifest file, or source directory does not exist."
-      return
-    end
+    do_exit unless valid_opts
 
     detect
 
@@ -34,10 +31,17 @@ class ClassVacuum < Tool
     to_disk(@report)
   end
 
+  #
+  # Valid if a link report, manifest and source directory has been supplied.
+  #
   def valid_opts
     File.exist?(@link_report) && File.exist?(@manifest) && File.exist?(@src) rescue false
   end
 
+  #
+  # Scans the project and detects classes that are in the source tree that are
+  # not in the compiler manifest report.
+  #
   def detect
     puts "Scanning project for classes that are uncompiled..."
 
@@ -97,4 +101,10 @@ class ClassVacuum < Tool
     classes
   end
 
+  #
+  # Log an error message to disk and raise exit.
+  #
+  def do_exit
+    super "The link report, manifest file, or source directory does not exist."
+  end
 end

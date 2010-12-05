@@ -22,10 +22,7 @@ class StyleVacuum < Tool
 
     @css_dir = opt[:css_dir]
 
-    unless valid_opts
-      @out.puts "#{INVALID_OPTS} The specified css directory does not exist, or does not contain css files."
-      return
-    end
+    do_exit unless valid_opts
 
     @style_regex = /styleName\s*=\s*["']\s*\{?\s*([\w.]+)\s*\}?\s*["']/
     @declared_regex = /^\.(\w+)/
@@ -50,6 +47,9 @@ class StyleVacuum < Tool
     found.length > 0
   end
 
+  #
+  # Scans the project and detects styles referenced in the source and css files.
+  #
   def detect
     puts "Scanning project for styles..."
 
@@ -87,4 +87,10 @@ class StyleVacuum < Tool
     desc
   end
 
+  #
+  # Log an error message and raise exit.
+  #
+  def do_exit
+    super "The specified css directory does not exist, or does not contain css files."
+  end
 end
