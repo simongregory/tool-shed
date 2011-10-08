@@ -19,9 +19,7 @@ Gem::Specification.new do |s|
   s.email                     = "tool-shed@helvector.org"
   s.homepage                  = "http://github.com/simongregory/tool-shed"
   s.summary                   = "ActionScript and Flex Project Tools"
-  s.description               = <<EOF
-Utility scripts for working with ActionScript and Flex projects.
-EOF
+  s.description               = 'Utility scripts for working with ActionScript and Flex projects.'
   s.has_rdoc                  = true
   s.rdoc_options              = ["--charset=UTF-8"]
   s.extra_rdoc_files          = ['LICENSE', 'README.md']
