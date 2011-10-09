@@ -5,7 +5,7 @@ Bundler.require
 require 'metric_fu'
 require 'rake/clean'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 ENV['CI_REPORTS'] = 'tmp/reports' #Hide these here for now...
 require 'ci/reporter/rake/test_unit'
@@ -48,24 +48,31 @@ task :hudson => ['ci:setup:testunit', :test, 'metrics:all']
 #
 #############################################################################
 
+desc "Build and release the gem"
 task :release do
   puts ""
   print "Are you sure you want to relase tool-shed #{ToolShed::VERSION::STRING}? [y/N] "
   exit unless STDIN.gets.index(/y/i) == 0
-  
+
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
     exit!
   end
-  
+
   # Build gem and upload
   sh "gem build tool-shed.gemspec"
   sh "gem push tool-shed-#{ToolShed::VERSION::STRING}.gem"
   sh "rm tool-shed-#{ToolShed::VERSION::STRING}.gem"
-  
+
   # Commit
   sh "git commit --allow-empty -a -m 'v#{ToolShed::VERSION::STRING}'"
   sh "git tag v#{ToolShed::VERSION::STRING}"
   sh "git push origin master"
   sh "git push origin v#{ToolShed::VERSION::STRING}"
+end
+
+desc "Build and install the gem"
+task :install do
+  sh "gem build tool-shed.gemspec"
+  sh "gem install tool-shed-#{ToolShed::VERSION::STRING}.gem"
 end

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.email                     = "tool-shed@helvector.org"
   s.homepage                  = "http://github.com/simongregory/tool-shed"
   s.summary                   = "ActionScript and Flex Project Tools"
-  s.description               = 'Utility scripts for working with ActionScript and Flex projects.'
+  s.description               = 'Utility scripts and Rake tasks for working with ActionScript and Flex projects.'
   s.has_rdoc                  = true
   s.rdoc_options              = ["--charset=UTF-8"]
   s.extra_rdoc_files          = ['LICENSE', 'README.md']
@@ -34,7 +34,13 @@ Welcome to the Tool-Shed
 ========================
 Get Tooled Up #{ToolShed::VERSION::STRING}. Kick off.
 
-Thanks for installing, the tools are under development. Don't expect reliability.
+Thanks for installing, the tools are under development
+so may be a little tempremental. When they 'just work'
+it's likely they're running from a project root, which
+contains src, test and lib dirs.
+
+See the README for more details, each tool can be run
+with -h for a list of options.
 
 EOF
   s.add_bundler_dependencies

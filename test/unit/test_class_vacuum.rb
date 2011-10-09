@@ -25,7 +25,7 @@ class TestClassVacuum < Test::Unit::TestCase
 
       should "find empty packages" do
         assert @tool.empty_packages.length > 0
-        assert_equal('org/helvector', @tool.empty_packages[0])
+        assert_equal('org', @tool.empty_packages[0])
       end
 
       should "have valid options" do
