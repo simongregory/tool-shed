@@ -6,11 +6,13 @@ module ActionScriptVersion
                   :minor,
                   :patch,
                   :template,
+                  :strip_xml_comments,
                   :output
 
     def initialize name = :version
       @name = name
       @output = 'Version.as'
+      @strip_xml_comments = false
 
       yield self if block_given?
 
@@ -22,10 +24,12 @@ module ActionScriptVersion
       task @name do
         revision = `git rev-parse HEAD`.chomp rescue 'no-git-rev'
         t = File.read(@template)
-        t.sub!('@major@', major.to_s)
-        t.sub!('@minor@', minor.to_s)
-        t.sub!('@patch@', patch.to_s)
-        t.sub!('@revision@', revision)
+        t.gsub!('@major@', major.to_s)
+        t.gsub!('@minor@', minor.to_s)
+        t.gsub!('@patch@', patch.to_s)
+        t.gsub!('@revision@', revision)
+        t = Stripper.xml_comments(t) if @strip_xml_comments
+
         File.open(@output, 'w') {|f| f.write(t) }
 
         puts "Created #{output}, v#{major}.#{minor}.#{patch} [#{revision[0..10]}]"

@@ -58,7 +58,7 @@ class Manifest < Tool
   def process(list)
     list.uniq!
     list.sort! { |before,after| before[:xml] <=> after[:xml] }
-    list.select { |element| element[:xml].include?(@filter) }
+    list.select { |element| element[:xml].match(@filter) }
   end
 
   #
