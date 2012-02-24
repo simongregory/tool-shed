@@ -34,10 +34,20 @@ Welcome to the Tool-Shed
 ========================
 Get Tooled Up #{ToolShed::VERSION::STRING}. Kick off.
 
-Thanks for installing, the tools are under development
-so may be a little tempremental. When they 'just work'
-it's likely they're running from a project root, which
-contains src, test and lib dirs.
+Thanks for installing:
+
+  as-asset-vacuum
+  as-class-vacuum
+  as-concrete
+  as-docp
+  as-manifest
+  as-style-vacuum
+  as-vacuum
+
+The tools are under development so may be a little
+tempremental. When they 'just work' it's likely
+they're running from a project root, which contains
+src, test and lib dirs.
 
 See the README for more details, each tool can be run
 with -h for a list of options.
