@@ -43,7 +43,7 @@ class Manifest < Tool
       ext = File.extname(path)
       name = File.basename(path, ext)
 
-      found << add(path, name) if name =~ /^[A-Z]/
+      found << add(path, name) #if name =~ /^[A-Z]/
     end
 
     found = process(found) unless found.empty?
