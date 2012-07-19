@@ -4,13 +4,8 @@ lib = File.expand_path File.join(File.dirname(__FILE__), 'lib')
 $:.unshift lib unless $:.include?(lib)
 
 require 'bundler'
-require 'rake'
-require 'tool_shed'
+require 'shed/version'
 
-#
-# For gem spec reference see:
-# http://docs.rubygems.org/read/chapter/20#rubyforge_project
-#
 Gem::Specification.new do |s|
   s.name                      = ToolShed::NAME
   s.version                   = ToolShed::VERSION::STRING
@@ -24,12 +19,12 @@ Gem::Specification.new do |s|
   s.rdoc_options              = ["--charset=UTF-8"]
   s.extra_rdoc_files          = ['LICENSE', 'README.md']
   s.required_rubygems_version = ">= 1.3.6"
-  s.require_path              = ['lib']
-  s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store|.tmproj|tmp|.gem/
-  s.test_files                = Dir["test/*_test.rb"]
-  s.executables               = ['as-docp', 'as-manifest', 'as-class-vacuum',
+  s.files                      = Dir['**/*']
+  s.files.reject!              { |fn| fn.match /\.(DS_Store|svn|git|tmproj|gem)|tmp/ }
+  s.test_files                 = Dir["test/*_test.rb"]
+  s.executables                = ['as-docp', 'as-manifest', 'as-class-vacuum',
                                  'as-style-vacuum', 'as-asset-vacuum', 'as-concrete']
-  s.post_install_message      = <<EOF
+  s.post_install_message       = <<EOF
 Welcome to the Tool-Shed
 ========================
 Get Tooled Up #{ToolShed::VERSION::STRING}. Kick off.
@@ -53,6 +48,8 @@ See the README for more details, each tool can be run
 with -h for a list of options.
 
 EOF
-  s.add_bundler_dependencies
-
+  s.add_dependency 'rake', '>= 0.9.2'
+  s.add_development_dependency 'shoulda'
+  s.add_development_dependency 'mocha'
+  s.require_paths << 'lib'
 end

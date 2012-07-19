@@ -2,24 +2,13 @@ require 'bundler'
 
 Bundler.require
 
-require 'metric_fu'
 require 'rake/clean'
 require 'rake/testtask'
 require 'rdoc/task'
 
-ENV['CI_REPORTS'] = 'tmp/reports' #Hide these here for now...
-require 'ci/reporter/rake/test_unit'
+#require File.dirname(__FILE__) + '/lib/shed/version'
 
-require File.dirname(__FILE__) + '/lib/shed/version'
-
-MetricFu::Configuration.run do |config|
-  config.rcov[:test_files] = ['test/unit/**/test_*.rb']
-  config.flay ={:dirs_to_flay => ['lib'],
-                :minimum_score => 10,
-                :filetypes => ['rb'] }
-end
-
-CLEAN.add('tmp')
+# TODO:SimpleCov https://github.com/colszowka/simplecov
 
 Rake::RDocTask.new do |rdoc|
   rdoc.title = " ActionScript Tools v.#{ToolShed::VERSION::STRING}"
@@ -34,7 +23,9 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-CLEAN.add('rdoc')
+CLEAN.add 'rdoc'
+CLEAN.add '*.gem'
+CLEAN.add 'tmp'
 
 desc "Default"
 task :default => [:test]

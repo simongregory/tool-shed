@@ -1,12 +1,15 @@
 # encoding: utf-8
 
-$:.push File.join(File.dirname(__FILE__), "..", "lib")
-$:.push File.dirname(__FILE__)
+require 'bundler'
+Bundler.require :default, :development
+
+lib = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'lib'))
+$:.unshift lib unless $:.include? lib
+
+test = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+$:.unshift test unless $:.include? test
 
 require 'tool_shed'
-require 'bundler'
-
-Bundler.require :development
 
 #Create empty directories for the unit tests, as Git ignores empty directories.
 empties = ['test/fixtures/empty/borg',
