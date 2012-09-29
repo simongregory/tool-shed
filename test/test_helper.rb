@@ -17,7 +17,8 @@ empties = ['test/fixtures/empty/borg',
            'test/fixtures/empty/xorg',
            'test/fixtures/empty/zorg',
            'test/fixtures/unused-cla/src/org',
-           'test/fixtures/empty/sorg/.svn/sub/verted',
+           'test/fixtures/empty/sorg/',
+           'test/fixtures/empty/sorg/.svn/subverted',
            'test/fixtures/empty/gorg/.git/head']
 
 empties.each { |f|
