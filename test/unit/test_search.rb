@@ -52,8 +52,18 @@ class TestSearch < Test::Unit::TestCase
 
     should "list all directories in a sub tree that are empty" do
       Search.for_empties(@path) { |f| @found << f }
-      assert_equal(6, @found.length)
-      assert_match(/(b|s|g|x|z)org/, @found.to_s)
+
+      puts @found
+
+      assert_match(/borg/, @found.to_s)
+      assert_match(/\borg\b/, @found.to_s)
+      assert_match(/gorg/, @found.to_s)
+      assert_match(/sorg/, @found.to_s)
+      assert_match(/xorg/, @found.to_s)
+      assert_match(/zorg/, @found.to_s)
+
+      # assert_equal(6, @found.length)
+      #assert_match(/(b|s|g|x|z)org/, @found.to_s)
     end
 
     should "list all directories in a sub tree that are empty but skipping specified exclusions" do
