@@ -17,9 +17,8 @@ empties = ['test/fixtures/empty/borg',
            'test/fixtures/empty/xorg',
            'test/fixtures/empty/zorg',
            'test/fixtures/unused-cla/src/org',
-           'test/fixtures/empty/sorg/',
-           'test/fixtures/empty/sorg/.svn/subverted',
-           'test/fixtures/empty/gorg/.git/head']
+           'test/fixtures/empty/svn/a',
+           'test/fixtures/empty/git/b/c']
 
 empties.each { |f|
   FileUtils.mkdir_p(f) unless File.exists?("#{f}")

@@ -53,32 +53,33 @@ class TestSearch < Test::Unit::TestCase
     should "list all directories in a sub tree that are empty" do
       Search.for_empties(@path) { |f| @found << f }
 
-      assert_match(/borg/, @found.to_s)
-      assert_match(/\borg\b/, @found.to_s)
-      assert_match(/gorg/, @found.to_s)
-      assert_match(/sorg/, @found.to_s)
-      assert_match(/xorg/, @found.to_s)
-      assert_match(/zorg/, @found.to_s)
+      assert_match(/\/borg/, @found.to_s)
+      assert_match(/\/xorg/, @found.to_s)
+      assert_match(/\/zorg/, @found.to_s)
+      assert_match(/\/org/, @found.to_s)
+      assert_match(/\/git/, @found.to_s)
+      assert_match(/\/svn/, @found.to_s)
 
-      # assert_equal(6, @found.length)
-      #assert_match(/(b|s|g|x|z)org/, @found.to_s)
+      assert_equal(6, @found.length)
     end
 
-    should "list all directories in a sub tree that are empty but skipping specified exclusions" do
-      Search.for_empties(@path, ['org', '.svn', '.git']) { |f| @found << f }
-      assert_equal(5, @found.length)
-      assert_match(/(b|x|z)org/, @found.to_s)
+    should "skip specified exclusions when searching for empty directories" do
+      Search.for_empties(@path, ['org', 'git', 'zorg']) { |f| @found << f }
+
+      assert_equal(3, @found.length)
     end
 
-    context "finding hidden directories by default" do
+    context "finds hidden directories by default" do
 
       should "not recurse into svn directories" do
         Search.for_empties(@path) { |f| @found << f }
+
         assert_equal(6, @found.length)
       end
 
       should "not recurse into git directories" do
         Search.for_empties(@path) { |f| @found << f }
+
         assert_equal(6, @found.length)
       end
     end

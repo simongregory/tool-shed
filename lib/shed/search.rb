@@ -31,7 +31,7 @@ module Search
   #
   # Scans the path and its children for empty directories.
   #
-  def self.for_empties(dir,excluding=['.svn','.git'])
+  def self.for_empties(dir,excluding=[])
 
     Find.find(dir) do |path|
 
@@ -43,9 +43,7 @@ module Search
           yield path if Dir.entries(path).join =~ /^\.\.\.(\.(svn|git))?$/
         end
       end
-
     end
-
   end
 
 end
