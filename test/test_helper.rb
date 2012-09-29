@@ -21,5 +21,5 @@ empties = ['test/fixtures/empty/borg',
            'test/fixtures/empty/gorg/.git/head']
 
 empties.each { |f|
-  `mkdir -p #{f}` unless File.exists?("#{f}")
+  FileUtils.mkdir_p(f) unless File.exists?("#{f}")
 }
