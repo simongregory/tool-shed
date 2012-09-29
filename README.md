@@ -1,5 +1,7 @@
 # Tool Shed
 
+[![Build Status](https://secure.travis-ci.org/simongregory/tool-shed.png)](http://travis-ci.org/simongregory/tool-shed)
+
 A collection of utility scripts and rake tasks to help working with ActionScript and Flex projects. They are under development, so **don't** expect too much reliability.
 
 All tools have help available on the command line, to view use: `as-tool-name -h`
