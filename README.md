@@ -65,7 +65,7 @@ To generate a manifest.xml file for use when declaring namespaces to the flex co
       t.output = 'src/Desktop-manifest.xml'
       t.filter = 'bbc.ipd.view.components'
     end
-    
+
 To make a version file from a template which contains the keys @major@, @minor@, @patch@, @revision@
     
     version do |t|
@@ -77,10 +77,6 @@ To make a version file from a template which contains the keys @major@, @minor@,
 ## Install
 
     gem install tool-shed
-
-## Authors
-
-[Simon Gregory](http://simongregory.com)
 
 ## License
 
