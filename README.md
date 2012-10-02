@@ -1,6 +1,6 @@
 # Tool Shed
 
-[![Build Status](https://secure.travis-ci.org/simongregory/tool-shed.png)](http://travis-ci.org/simongregory/tool-shed)
+[![Build Status](https://secure.travis-ci.org/simongregory/tool-shed.png)](http://travis-ci.org/simongregory/tool-shed) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/simongregory/tool-shed)
 
 A collection of utility scripts and rake tasks to help working with ActionScript and Flex projects. They are under development, so **don't** expect too much reliability.
 
@@ -67,7 +67,7 @@ To generate a manifest.xml file for use when declaring namespaces to the flex co
     end
 
 To make a version file from a template which contains the keys @major@, @minor@, @patch@, @revision@
-    
+
     version do |t|
       t.template = 'etc/templates/Version.as'
       t.major, t.minor, t.patch = 5, 0, 0
