@@ -24,7 +24,7 @@ module FlexHeaders
         Dir[ "{#{@paths}}/**/*.as" ].each do |uri|
           src = IO.read( uri )
           File.open( uri, 'w+' ) do |f|
-            f << src.sub( /.+?(?=package)/m, @header )
+            f << src.sub( /.*?(?=package)/m, @header )
           end
         end
         puts "Added copyright header to all .as files"
