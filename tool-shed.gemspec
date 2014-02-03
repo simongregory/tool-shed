@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.rdoc_options              = ["--charset=UTF-8"]
   s.extra_rdoc_files          = ['LICENSE', 'README.md']
   s.required_rubygems_version = ">= 1.3.6"
+  s.license                   = 'MIT'
   s.files                      = Dir['**/*']
   s.files.reject!              { |fn| fn.match /\.(DS_Store|svn|git|tmproj|gem)|tmp/ }
   s.test_files                 = Dir["test/*_test.rb"]
@@ -27,7 +28,9 @@ Gem::Specification.new do |s|
   s.post_install_message       = <<EOF
 Welcome to the Tool-Shed
 ========================
-Get Tooled Up #{ToolShed::VERSION::STRING}. Kick off.
+You are now tooled up #{ToolShed::VERSION::STRING} with a
+small set of utilities for keeping ActionScript 3 and
+Flex projects in shape.
 
 Thanks for installing:
 

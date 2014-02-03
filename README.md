@@ -1,6 +1,7 @@
 # Tool Shed
 
-[![Build Status](https://secure.travis-ci.org/simongregory/tool-shed.png)](http://travis-ci.org/simongregory/tool-shed) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/simongregory/tool-shed)
+[![Build Status](https://secure.travis-ci.org/simongregory/tool-shed.png)](http://travis-ci.org/simongregory/tool-shed)
+[![Code Climate](https://codeclimate.com/github/simongregory/tool-shed.png)](https://codeclimate.com/github/simongregory/tool-shed)
 
 A collection of utility scripts and rake tasks to help working with ActionScript and Flex projects. They are under development, so **don't** expect too much reliability.
 
