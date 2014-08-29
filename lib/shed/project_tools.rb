@@ -54,7 +54,7 @@ class ProjectTools
   # project.
   #
   def self.flex_file_regx
-    /\.(as|mxml|asdoc)$/
+    /\.(as|mxml|asdoc|fxg)$/
   end
 
 end

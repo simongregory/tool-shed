@@ -22,10 +22,10 @@ class TestManifest < Test::Unit::TestCase
       assert((@manf.components.length > 1))
       assert((@manf.components.length == 7))
 
-      assert_match(/org\.helvector\.one\.HelOneTwo/, @manf.xml)
-      assert_match(/org\.helvector\.one\.HelOne/, @manf.xml)
-      assert_match(/org\.helvector\.three\.HelThree/, @manf.xml)
-      assert_match(/org\.helvector\.three\.HelvectorIcon/, @manf.xml)
+      assert_match(/"org\.helvector\.one\.HelOneTwo"/, @manf.xml)
+      assert_match(/"org\.helvector\.one\.HelOne"/, @manf.xml)
+      assert_match(/"org\.helvector\.three\.HelThree"/, @manf.xml)
+      assert_match(/"org\.helvector\.three\.HelvectorIcon"/, @manf.xml)
       assert_match(/org\.helvector\.Helvector/, @manf.xml)
       assert_match(/org\.helvector\.four\.helUtil/, @manf.xml)
     end
