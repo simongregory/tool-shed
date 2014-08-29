@@ -17,14 +17,15 @@ class TestManifest < Test::Unit::TestCase
       File.delete @output
     end
 
-    should "find all actionscript and .mxml files in src tree" do
+    should "find all actionscript, mxml and fxg files in src tree" do
       assert_equal(false, @manf.xml.empty?)
       assert((@manf.components.length > 1))
-      assert((@manf.components.length == 6))
+      assert((@manf.components.length == 7))
 
       assert_match(/org\.helvector\.one\.HelOneTwo/, @manf.xml)
       assert_match(/org\.helvector\.one\.HelOne/, @manf.xml)
       assert_match(/org\.helvector\.three\.HelThree/, @manf.xml)
+      assert_match(/org\.helvector\.three\.HelvectorIcon/, @manf.xml)
       assert_match(/org\.helvector\.Helvector/, @manf.xml)
       assert_match(/org\.helvector\.four\.helUtil/, @manf.xml)
     end

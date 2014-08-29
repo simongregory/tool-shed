@@ -12,7 +12,7 @@ class Manifest < Tool
   def initialize(opt,out=STDOUT)
     super(opt,out)
 
-    @filetypes = /\.(as|mxml)$/
+    @filetypes = /\.(as|mxml|fxg)$/
     @filter = opt[:filter] || ''
 
     build
@@ -68,7 +68,7 @@ class Manifest < Tool
     @components = scan(@src)
 
     if @components.empty?
-      puts "No ActionScript or Mxml files found."
+      puts "No ActionScript, MXML or FXG files found."
     else
       create_xml(@components)
 
